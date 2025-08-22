@@ -6,14 +6,16 @@ html, body {
 
 /* ---------- TOP BAR ---------- */
 .layout-topbar {
-  background-color: #209344;
+  background-color: #4CAF50;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 4px 40px;
-  font-size: 16px;
+  align-items: center;   
+  padding: 5px 40px;       
+  font-size: 15px;
   color: white;
-  height: 30px;
+  height: 40px;         
+  position: static;       
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
 
 .layout-topbar-left {
@@ -26,15 +28,20 @@ html, body {
   align-items: center;
   color: white;
   text-decoration: none;
+  font-size: 15px;
+}
+
+.layout-topbar-item:hover {
+  opacity: 0.9;
 }
 
 .layout-topbar-item span {
-  margin-left: 6px;
+  margin-left: 4px;
 }
 
 .layout-topbar-separator {
-  margin: 0 10px;
-  color: rgba(255, 255, 255, 0.7);
+  margin: 0 12px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .layout-topbar-right {
@@ -42,93 +49,201 @@ html, body {
   align-items: center;
 }
 
-.layout-topbar-right a {
-  margin-left: 12px;
+/* Social icons */
+.social-icon {
   color: white;
-  font-size: 18px;
+  font-size: 20px; 
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.layout-topbar-right a:hover {
+.social-icon:hover {
   opacity: 0.8;
+  transform: scale(1.1); 
 }
 
+/* Remove background */
+.social-icon.fb,
+.social-icon.tw,
+.social-icon.ln,
+.social-icon.pt,
+.social-icon.yt {
+  background: none !important;
+  box-shadow: none !important;
+}
 
+/* Catalogue button */
+.catalogue-btn {
+  background-color: #FF5722;
+  color: white;
+  padding: 4px 10px;       
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;         
+  margin-left: 10px;
+  height: 35px;           
+  line-height: 28px;             
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.catalogue-btn:hover {
+  background-color: #E64A19;
+}
+
+.catalogue-icon {
+  margin-right: 4px;
+  font-size: 16px;
+}
 
 /* ---------- NAV BAR ---------- */
 .layout-navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 40px;
-  border-bottom: 1px solid #eee;
-  position: relative;
-  height: 60px;
-  z-index: 1000;
+  padding: 12px 40px;
+  background: white;
+  height: 80px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0; /* Position at top since topbar is not fixed on desktop */
+  z-index: 999;
+
+  /* animation setup */
+  transition: all 0.3s ease;
+}
+
+.layout-navbar.scrolled {
+  height: 65px; /* shrink a bit */
+  background: #f9f9f9; 
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
 .layout-navbar-logo {
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
   font-size: 25px;
-  color: #209344;
+  color: #4CAF50;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  background: linear-gradient(135deg, #FF9800, #4CAF50);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .layout-navbar-links {
   display: flex;
   align-items: center;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .layout-navbar-links a {
-  color: #209344;
-  margin-left: 20px;
+  color: #4CAF50;
+  margin-left: 30px;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 25px;
+  letter-spacing: 0.3px;
 }
 
 .layout-navbar-links a:hover {
-  text-decoration: solid;
+  color: #388E3C;
 }
 
 .layout-navbar-hamburger {
   display: none;
   background: none;
   border: none;
-  color: #209344;
-  font-size: 28px;
+  color: #4CAF50;
+  font-size: 24px;
   cursor: pointer;
 }
 
 /* --- Responsive: Mobile styles --- */
-@media (max-width: 767px) {
-  /* Top bar adjustments */
+@media (max-width: 768px) {
+  /* ---------- TOP BAR ---------- */
   .layout-topbar {
-    padding: 8px 15px;
-    font-size: 12px;
-    justify-content: center;
-    gap: 8px;
+    padding: 2px 10px;         /* Decreased padding for smaller height */
+    height: 30px;              /* Smaller height */
+    font-size: 11px;
+    flex-direction: row;       /* Keep items in a row */
+    justify-content: center;   /* Center items */
+    align-items: center;
+    gap: 5px;                  /* Small gap between items */
+    position: sticky;          /* Sticky to top */
+    top: 0;
+    z-index: 1000;
+    background-color: #4CAF50;
   }
 
-  .layout-topbar-left {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .layout-topbar-separator {
+  /* Only show phone and main info, hide social icons and catalogue */
+  .social-icon,
+  .catalogue-btn {
     display: none;
   }
 
-  /* Navbar adjustments */
-  .layout-navbar {
-    padding: 10px 15px;
+  /* Keep separator between main and phone */
+  .layout-topbar-separator {
+    display: inline-block;
+    width: 1px;
+    height: 14px;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin: 0 6px;
   }
 
-  /* Show hamburger */
+  .layout-topbar-item:not(.social-icon):not(.catalogue-btn) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---------- NAV BAR ---------- */
+  .layout-navbar {
+    padding: 20px 15px;        /* Increased padding for taller nav */
+    height: 70px;              /* Increased height */
+    position: sticky;
+    top: 30px;                 /* Stick below the top bar */
+    z-index: 999;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .layout-navbar-logo {
+    font-size: 20px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
   .layout-navbar-hamburger {
     display: block;
   }
 
-  /* Hide nav links by default */
   .layout-navbar-links {
     display: none;
     flex-direction: column;
@@ -138,23 +253,324 @@ html, body {
     left: 0;
     right: 0;
     border-top: 1px solid #eee;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
-    z-index: 999;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 998;
   }
 
-  /* Show nav links when menu open */
   .layout-navbar-links.open {
     display: flex;
   }
 
   .layout-navbar-links a {
-    color: #209344;
-    margin: 12px 20px;
-    font-weight: 600;
-    border-bottom: 1px solid #eee;
+    margin: 0;
+    padding: 18px 20px;       /* Slightly larger padding for taller nav items */
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
   }
 
   .layout-navbar-links a:last-child {
     border-bottom: none;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .layout-topbar {
+    padding: 2px 8px;
+    height: 28px;
+    font-size: 10px;
+  }
+
+  .layout-navbar {
+    padding: 18px 10px;
+    height: 65px;
+    top: 28px; /* Adjust based on topbar height */
+  }
+
+  .layout-navbar-logo {
+    font-size: 18px;
+  }
+}
+
+/* Desktop - Static topbar, sticky navbar */
+@media (min-width: 769px) {
+  .layout-topbar {
+    position: static;      /* CHANGED: Static position for desktop */
+    background-color: #4CAF50;
+    height: 40px;          
+    padding: 5px 40px; 
+  }
+
+  .layout-navbar {
+    position: sticky;      /* Keep sticky behavior */
+    top: 0;               /* CHANGED: Stick to top since topbar is not fixed */          
+    z-index: 999;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    height: 80px;            
+    padding: 15px 40px;
+  }
+}
+
+/* Floating Sidebar */
+.hm-floating-sidebar {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  animation: hm-slideIn 0.5s ease-out;
+}
+
+.hm-floating-sidebar.hm-minimized {
+  transform: translateY(-50%) translateX(100%);
+}
+
+/* Toggle Button */
+.hm-sidebar-toggle-btn {
+  position: fixed;
+  right: 0;
+  top: calc(50% + 75px);
+  z-index: 1001;
+  width: 30px;
+  height: 50px;
+  background: #28a745;
+  border: none;
+  border-radius: 0 0 0 8px;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hm-sidebar-toggle-btn:hover {
+  background: #218838;
+  width: 35px;
+}
+
+/* Sidebar Buttons */
+.hm-sidebar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.hm-sidebar-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.hm-sidebar-btn:hover svg {
+  transform: scale(1.1);
+}
+
+.hm-phone-btn {
+  background: #25d366;
+}
+.hm-phone-btn:hover {
+  background: #128c7e;
+}
+
+.hm-email-btn {
+  background: #34a853;
+}
+.hm-email-btn:hover {
+  background: #2d8f47;
+}
+
+.hm-scroll-top-btn {
+  background: #4285f4;
+}
+.hm-scroll-top-btn:hover {
+  background: #3367d6;
+}
+
+/* Animation */
+@keyframes hm-slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Responsive - Mobile Bottom Bar */
+@media (max-width: 768px) {
+  .hm-floating-sidebar {
+    /* Position at bottom of screen */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    
+    /* Transform to horizontal layout */
+    transform: none;
+    width: 100%;
+    height: auto;
+    
+    /* Flex layout for horizontal buttons with bigger gaps */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 40px; /* Bigger gap between buttons */
+    
+    /* Styling */
+    background: #ff6b35; /* Orange background like in screenshot 2 */
+    padding: 12px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .hm-floating-sidebar.hm-minimized {
+    /* Remove minimized functionality - always show */
+    transform: none;
+  }
+  
+  .hm-sidebar-btn {
+    /* Horizontal button layout */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .hm-sidebar-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .hm-sidebar-toggle-btn {
+    /* Completely hide the toggle button */
+    display: none !important;
+  }
+  
+  /* Optional: Add some bottom padding to body to prevent content overlap */
+  body {
+    padding-bottom: 70px;
+  }
+}
+
+/* Alternative version with even distribution across full width */
+@media (max-width: 768px) {
+  .hm-floating-sidebar.full-width-distribution {
+    justify-content: space-evenly;
+    padding: 12px 20px;
+  }
+  
+  .hm-floating-sidebar.full-width-distribution .hm-sidebar-btn {
+    margin: 0;
+    flex: 1;
+    max-width: 60px;
+  }
+}
+
+
+/* Footer Styles */
+.hm-footer {
+  background-color: #209344;
+  color: #fff;
+  padding-top: 3rem;
+  font-family: Arial, sans-serif;
+}
+
+.hm-footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+.hm-footer-col {
+  flex: 1;
+  min-width: 220px;
+  margin-bottom: 2rem;
+}
+
+.hm-footer-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.hm-footer-text {
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.hm-footer-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #ffffff; /* green highlight like reference */
+}
+
+.hm-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hm-footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.hm-footer-links a {
+  text-decoration: none;
+  color: #ccc;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.hm-footer-links a:hover {
+  color: #209344;
+  transform: translateX(5px);
+}
+
+.hm-footer-bottom {
+  background-color: #E47527;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .hm-footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hm-footer-col {
+    min-width: 100%;
+  }
+
+  .hm-footer-links a:hover {
+    transform: none;
   }
 }

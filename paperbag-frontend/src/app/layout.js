@@ -88,7 +88,7 @@ export default function RootLayout({ children }) {
           <a href="/products">PRODUCTS</a>
           <a href="/market">MARKET</a>
           <a href="/company">COMPANY</a>
-          <a href="/news">NEWS & STORIES</a>
+          <a href="/blog">NEWS & STORIES</a>
           <a href="/contact">CONTACT US</a>
         </div>
       </nav>

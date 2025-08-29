@@ -303,7 +303,7 @@ html, body {
 
   .layout-navbar {
     position: sticky;      /* Keep sticky behavior */
-    top: 0;               /* CHANGED: Stick to top since topbar is not fixed */          
+    top: 0;                        
     z-index: 999;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);

@@ -1,6 +1,6 @@
 'use client';
 import "../styles/homepage.css";
-import "@fontsource/baloo-2";         // default weight 400
+import "@fontsource/baloo-2";         
 import "@fontsource/baloo-2/400.css";
 
 export default function Homepage() {

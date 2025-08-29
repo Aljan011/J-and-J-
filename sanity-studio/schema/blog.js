@@ -49,6 +49,19 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'productType',
+      title: 'Product Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Packaging Services', value: 'packaging' },
+          { title: 'Printing Services', value: 'printing' },
+          { title: 'Paper Bags', value: 'paperbags' },
+        ],
+        layout: 'radio', // can also be 'dropdown'
+      },
+    }),
   ],
 
   preview: {

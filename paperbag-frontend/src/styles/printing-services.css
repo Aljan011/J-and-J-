@@ -1,0 +1,247 @@
+/* ===========================
+   Printing Supplies - Mobile-first
+   Unique namespace: ps-*
+   Optimized for mobile (10-12 products)
+   =========================== */
+
+/* Page wrapper: use .page-offset globally to tune distance from nav */
+.ps-page {
+  width: 100%;
+  background: #fafbfb;
+  color: #263238;
+  /* font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================= HERO ================= */
+.ps-hero {
+  width: 100%;
+  padding: 20px 6%;
+  background: linear-gradient(135deg, #f8fafb 0%, #eef3f5 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ps-hero-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column; /* mobile stacked */
+  gap: 18px;
+  align-items: center;
+}
+
+/* text first */
+.ps-hero-text {
+  text-align: center;
+  max-width: 720px;
+}
+
+.ps-hero-title {
+  font-size: 1.6rem;
+  margin: 0 0 8px;
+  font-weight: 700;
+  color: #1f2933;
+}
+
+.ps-hero-sub {
+  font-size: 0.98rem;
+  color: #4b5563;
+  margin: 0 0 14px;
+}
+
+/* CTA */
+.ps-hero-cta {
+  display: inline-block;
+  background: #27ae60;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(39,174,96,0.12);
+}
+
+/* hero image (mobile small, but visible, constrained height) */
+.ps-hero-img {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+}
+
+/* ================= PRODUCTS ================= */
+.ps-products {
+  padding: 18px 6% 60px;
+}
+
+.ps-products-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ps-section-title {
+  font-size: 1.25rem;
+  margin: 6px 0 18px;
+  font-weight: 700;
+  color: #1f2933;
+  text-align: left;
+}
+
+/* Grid: mobile first uses 2 columns (large cards) */
+.ps-products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Card */
+.ps-card {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 10px 28px rgba(12, 20, 30, 0.06);
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.ps-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(12, 20, 30, 0.09);
+}
+
+/* Image area: keeps consistent height */
+.ps-card-image {
+  width: 100%;
+  height: 160px; /* mobile-friendly fixed height */
+  overflow: hidden;
+}
+
+/* Card body */
+.ps-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.ps-card-title {
+  font-size: 1rem;
+  margin: 0;
+  color: #0f1720;
+  font-weight: 700;
+}
+
+.ps-card-desc {
+  margin: 0;
+  color: #475569;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* Actions: left link + right CTA */
+.ps-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* subtle link */
+.ps-link {
+  color: #27ae60;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* CTA button */
+.ps-cta {
+  margin-left: auto;
+  background: #27ae60;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ================= Larger screens (tablet) ================= */
+@media (min-width: 700px) {
+  .ps-hero-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .ps-hero-text {
+    text-align: left;
+    flex: 1;
+  }
+
+  .ps-hero-img {
+    flex: 1;
+  }
+
+  /* product grid -> 3 columns on tablet */
+  .ps-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .ps-card-image {
+    height: 180px;
+  }
+
+  .ps-hero-title {
+    font-size: 2.0rem;
+  }
+}
+
+/* ================= Desktop ================= */
+@media (min-width: 1100px) {
+  .ps-hero-inner {
+    gap: 40px;
+  }
+
+  /* 4 columns for large screens (shows more products without crowding) */
+  .ps-products-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .ps-card-image {
+    height: 200px;
+  }
+
+  .ps-section-title {
+    font-size: 1.35rem;
+  }
+}
+
+/* ================= Accessibility / Small helpers ================= */
+.ps-page img {
+  display: block;
+}
+
+/* Utility: reduce top offset for pages where nav is not fixed */
+.page-offset {
+  padding-top: 60px; /* tweak to match your navbar height */
+}
+
+/* Small screens tweak: ensure hero area doesn't dominate */
+@media (max-height: 680px) and (max-width: 480px) {
+  .ps-hero {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .ps-hero-img { max-height: 45vh; }
+}

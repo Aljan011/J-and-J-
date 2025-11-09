@@ -1,0 +1,162 @@
+/* Paper Bags Section */
+.pb-products {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f1f2f6 0%, #dfe4ea 100%);
+  position: relative;
+}
+
+.pb-products::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%2327ae60" fill-opacity="0.03"><circle cx="30" cy="30" r="1.5"/></g></g></svg>');
+  pointer-events: none;
+}
+
+.pb-container {
+  width: 90%;
+  margin: auto;
+}
+
+.pb-section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 50px;
+  color: #2c3e50;
+}
+
+.pb-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.pb-product-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  transition: 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid transparent;
+}
+
+.pb-product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+  border-color: rgba(39, 174, 96, 0.2);
+}
+
+.pb-product-image {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pb-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.pb-product-card:hover img {
+  transform: scale(1.08);
+}
+
+.pb-product-content {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pb-product-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.pb-product-title::after {
+  content: '';
+  width: 30px;
+  height: 3px;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.pb-product-card:hover .pb-product-title::after {
+  width: 50px;
+}
+
+.pb-product-desc {
+  flex: 1;
+  margin: 20px 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.pb-product-link {
+  color: #27ae60;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  padding-right: 25px;
+  transition: 0.3s;
+}
+
+.pb-product-link::after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  transition: 0.3s;
+}
+
+.pb-product-link:hover {
+  transform: translateX(5px);
+  color: #229954;
+}
+
+.pb-product-link:hover::after {
+  transform: translateX(5px);
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+  .pb-products {
+    padding: 70px 0;
+  }
+
+  .pb-products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .pb-product-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pb-products-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .pb-product-image {
+    height: 160px;
+  }
+
+  .pb-product-content {
+    padding: 15px;
+  }
+}

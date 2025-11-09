@@ -2,8 +2,10 @@
 import React, {useState, useEffect} from 'react';
 import '../styles/layout.css';
 import './globals.css';
+import "@fontsource/baloo-2/400.css"; 
+import "@fontsource/baloo-2";
 import FloatingSidebar from './FloatingSidebar';
-import { FaFacebook, FaTwitter, FaLinkedin, FaPinterest, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTiktok, FaLocationArrow } from 'react-icons/fa';
 
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS manually
@@ -36,45 +38,45 @@ export default function RootLayout({ children }) {
         <div className="layout-topbar-left">
           <a href="mailto:info@jjprinters.com" className="layout-topbar-item">
   <span style={{ fontSize: "25px" }}>✉</span>
-  <span>info@jjprinters.com</span>
+  <span>jandjsprinting@gmail.com</span>
 </a>
           <span className="layout-topbar-separator">|</span>
-          <a href="tel:+1234567890" className="layout-topbar-item">
+          <a href="+977 9843223219" className="layout-topbar-item">
   <Phone size={20} className="text-white" />
-  <span>+1 234 567 890</span>
+  <span>+977 9843223219</span>
 </a>
         </div>
 
          <div className="layout-topbar-right">
-      <a href="https://facebook.com" className="social-icon fb" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.facebook.com/paperbagnepalfactory/" className="social-icon fb" target="_blank" rel="noopener noreferrer">
         <FaFacebook />
       </a>
-      <a href="https://twitter.com" className="social-icon tw" target="_blank" rel="noopener noreferrer">
-        <FaTwitter />
+      <a href="https://www.instagram.com/jandj_paper_bag_nepal/" className="social-icon tw" target="_blank" rel="noopener noreferrer">
+        <FaInstagram />
       </a>
-      <a href="https://linkedin.com" className="social-icon ln" target="_blank" rel="noopener noreferrer">
-        <FaLinkedin />
-      </a>
-      <a href="https://pinterest.com" className="social-icon pt" target="_blank" rel="noopener noreferrer">
-        <FaPinterest />
-      </a>
-      <a href="https://youtube.com" className="social-icon yt" target="_blank" rel="noopener noreferrer">
-        <FaYoutube />
+      <a href="https://www.tiktok.com/@jandjs_packaging" className="social-icon ln" target="_blank" rel="noopener noreferrer">
+        <FaTiktok />
       </a>
 
-      <a href="/catalogue" className="catalogue-btn">
-        <span className="catalogue-icon">🔥</span>
-        CATALOGUE
+      <a href="https://maps.app.goo.gl/r1Rq6ZHzzLMwKRQF8" className="catalogue-btn">
+         <FaLocationArrow/>
+        <span className='catalogue-btn-name'>Find Us</span>
       </a>
     </div>
       </div>
 
       {/* NAV BAR */}
        <nav className={`layout-navbar ${scrolled ? "scrolled" : ""}`}>
-        <div className="layout-navbar-logo">
-          <div className="logo-icon">J&J</div>
-          J&J Printers
-        </div>
+  <div className="layout-navbar-logo">
+    <a href="/">
+      <img
+        src="/logo.jpg"
+        alt="J&J Printers Logo"
+        className="logo-icon cursor-pointer"
+      />
+    </a>
+  </div>
+  
 
         <button
           className="layout-navbar-hamburger"
@@ -85,10 +87,11 @@ export default function RootLayout({ children }) {
         </button>
 
         <div className={`layout-navbar-links ${menuOpen ? 'open' : ''}`}>
-          <a href="/products">PRODUCTS</a>
-          <a href="/market">MARKET</a>
-          <a href="/company">COMPANY</a>
-          <a href="/blog">NEWS & STORIES</a>
+          <a href="/paper-bags">Paper Bag</a>
+          <a href="/packaging-services">Packaging</a>
+          <a href="/printing-supplies">Printing supplies</a>
+          <a href="/about">About Us</a>
+          <a href="/blog">Blog</a>
           <a href="/contact">CONTACT US</a>
         </div>
       </nav>
@@ -103,8 +106,8 @@ export default function RootLayout({ children }) {
         <div className="hm-footer-col">
           <h3 className="hm-footer-logo">Company Logo</h3>
           <p className="hm-footer-text">
-            Your short company description goes here. We deliver quality and
-            excellence in all our products.
+            J and J’s Packaging is a leading packaging company in Nepal, 
+            specializing in paper bags, corrugated boxes, custom packaging, and printing supplies.
           </p>
         </div>
 
@@ -112,25 +115,28 @@ export default function RootLayout({ children }) {
         <div className="hm-footer-col">
           <h4 className="hm-footer-title">Quick Links</h4>
           <ul className="hm-footer-links">
-            <li><a href="#">Home</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">Paper Bag</a></li>
+            <li><a href="#">Corogated Box</a></li>
+            <li><a href="/packaging-services">Printing Supplies</a></li>
             <li><a href="#">About Us</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="#">Contact Us</a></li>
           </ul>
         </div>
 
         {/* Column 3: Contact Info */}
         <div className="hm-footer-col">
-          <h4 className="hm-footer-title">Contact Us</h4>
-          <p>Email: info@company.com</p>
-          <p>Phone: +977 1234567890</p>
+          <h2 className="hm-footer-title">Contact Us</h2>
+          <p>Email: jandjsprinting@gmail.com</p>
+          <p>Phone: +977 9843223219</p>
           <p>Address: Kathmandu, Nepal</p>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="hm-footer-bottom">
-        <p>© {new Date().getFullYear()} Your Company. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} JandJ Packaging. All rights reserved.</p>
       </div>
     </footer>
 

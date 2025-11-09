@@ -31,12 +31,19 @@ export default function Homepage() {
         </div>
         <div className="hm-hero-content">
           <div className="hm-container">
-            <h1 className="hm-hero-title">Premium Paper Bag Printing & Packaging Solutions</h1>
+            <h1 className="hm-hero-title">Premium Packaging Solutions in Nepal
+              <span className="hm-hero-subtitle">Paper Bags, Boxes & Printing Supplies</span>
+            </h1>
             <p className="hm-hero-tagline">
-              Custom printed paper bags for retail, events, and corporate branding. 
-              Quality printing that makes your brand stand out.
+              High-quality paper bags, boxes, and printing supplies in Kathmandu,
+               Lalitpur, Nepal. Custom, eco-friendly packaging solutions for every business.
             </p>
-            <button className="hm-hero-cta">Get Custom Quote</button>
+           <button
+  className="hm-hero-cta"
+  onClick={() => window.open("https://wa.me/9779843223219", "_blank")}
+>
+  Chat with our expert
+</button>
           </div>
         </div>
       </section>
@@ -49,7 +56,7 @@ export default function Homepage() {
             Trusted by Leading Brands
           </h1>
           <p className="hm-clients__subtitle">
-            We're proud to work with these amazing companies
+            Trusted by couriers, restaurants, clothing brands, e-commerce, food & beverage, and gift shops for custom, eco-friendly packaging that protects products and boosts brand image.
           </p>
         </div>
 
@@ -107,21 +114,21 @@ export default function Homepage() {
       </div>
       </section>
 
-      {/* Hot Selling Products Section */}
-{/* Hot Selling Products Section */}
+      
+{/* our services Section */}
 <section className="hm-hot-products">
   <div className="hm-container">
-    <h1 className="hm-section-title">Hot Selling Products</h1>
+    <h2 className="hm-section-title">Our Services</h2>
     <div className="hm-hot-products-grid">
       
       <div className="hm-hot-selling-products">
         <div className="hm-product-card">
           <div className="hm-product-image">
-            <img src="/public/luxury-shopping-bags.jpg" alt="Luxury Shopping Bags" />
+            <img src="/public/luxury-shopping-bags.jpg" alt="Custom Paper Bags in Nepal" />
           </div>
           <div className="hm-product-info">
-            <h3 className="hm-product-name">Luxury Shopping Bags</h3>
-            <p className="hm-product-desc">Premium kraft paper with rope handles and custom foil stamping for high-end retail brands.</p>
+            <h3 className="hm-product-name">Custom Paper Bags in Nepal</h3>
+            <p className="hm-product-desc">Durable, stylish, and eco-friendly custom paper bags in Nepal, fully customizable to showcase your brand.</p>
           </div>
         </div>
       </div>
@@ -129,11 +136,11 @@ export default function Homepage() {
       <div className="hm-hot-selling-products">
         <div className="hm-product-card">
           <div className="hm-product-image">
-            <img src="/public/eco-friendly-bags.jpg" alt="Eco-Friendly Bags" />
+            <img src="/public/eco-friendly-bags.jpg" alt="Corrugated Boxes & Packaging" />
           </div>
           <div className="hm-product-info">
-            <h3 className="hm-product-name">Eco-Friendly Bags</h3>
-            <p className="hm-product-desc">100% recyclable brown kraft bags with water-based inks, perfect for environmentally conscious businesses.</p>
+            <h3 className="hm-product-name">Corrugated Boxes & Packaging</h3>
+            <p className="hm-product-desc">Strong, reliable, and fully branded corrugated boxes in Nepal, perfect for shipping, storage, and retail display.</p>
           </div>
         </div>
       </div>
@@ -141,11 +148,11 @@ export default function Homepage() {
       <div className="hm-hot-selling-products">
         <div className="hm-product-card">
           <div className="hm-product-image">
-            <img src="/public/food-delivery-bags.jpg" alt="Food Delivery Bags" />
+            <img src="/public/food-delivery-bags.jpg" alt="Branding & Custom Packaging Solutions " />
           </div>
           <div className="hm-product-info">
-            <h3 className="hm-product-name">Food Delivery Bags</h3>
-            <p className="hm-product-desc">Grease-resistant paper bags with reinforced bottom, ideal for restaurants and food delivery services.</p>
+            <h3 className="hm-product-name">Branding & Custom Packaging Solutions </h3>
+            <p className="hm-product-desc">Custom packaging and branding solutions in Nepal designed to make your products stand out and leave a lasting impression.</p>
           </div>
         </div>
       </div>
@@ -156,8 +163,8 @@ export default function Homepage() {
             <img src="/public/promotional-bags.jpg" alt="Promotional Bags" />
           </div>
           <div className="hm-product-info">
-            <h3 className="hm-product-name">Promotional Bags</h3>
-            <p className="hm-product-desc">Custom printed bags for events, trade shows, and marketing campaigns with vibrant full-color printing.</p>
+            <h3 className="hm-product-name">Printing Supplies in Nepal</h3>
+            <p className="hm-product-desc">High-quality printing supplies in Nepal including leaflets, brochures, flyers, and visiting cards to promote your brand effectively. </p>
           </div>
         </div>
       </div>
@@ -170,65 +177,65 @@ export default function Homepage() {
       {/* Products Section */}
       <section className="hm-products">
         <div className="hm-container">
-          <h1 className="hm-section-title">Our Paper Bags</h1>
+          <h2 className="hm-section-title">Paper Bags</h2>
           <div className="hm-products-grid">
             <div className="hm-product-category">
               <div className="hm-category-image">
-                <img src="/public/shopping-bags-category.jpg" alt="Shopping Bags" />
+                <img src="/public/shopping-bags-category.jpg" alt="food industry paper bags" />
               </div>
               <div className="hm-category-content">
-                <h3 className="hm-category-title">Shopping Bags</h3>
-                <p className="hm-category-desc">Premium shopping bags for retail stores with custom branding and various handle options.</p>
+                <h3 className="hm-category-title">Food industry paper bags</h3>
+                <p className="hm-category-desc">Eco-friendly paper bag Nepal solutions for restaurants, bakeries, and cafés, perfect for food packaging and takeaways.</p>
                 <a href="#" className="hm-category-link">View Products</a>
               </div>
             </div>
             <div className="hm-product-category">
               <div className="hm-category-image">
-                <img src="/public/gift-bags-category.jpg" alt="Gift Bags" />
+                <img src="/public/gift-bags-category.jpg" alt="Clothing & Fashion Paper Bag" />
               </div>
               <div className="hm-category-content">
-                <h3 className="hm-category-title">Gift Bags</h3>
-                <p className="hm-category-desc">Elegant gift bags for special occasions with decorative finishes and luxury presentation.</p>
+                <h3 className="hm-category-title">Clothing & Fashion Paper Bag </h3>
+                <p className="hm-category-desc">Stylish and durable paper bag Nepal designs that add value to clothing, footwear, and boutique stores.</p>
                 <a href="#" className="hm-category-link">View Products</a>
               </div>
             </div>
             <div className="hm-product-category">
               <div className="hm-category-image">
-                <img src="/public/food-packaging-category.jpg" alt="Food Packaging" />
+                <img src="/public/food-packaging-category.jpg" alt="Cosmetics & Beauty Paper Bag" />
               </div>
               <div className="hm-category-content">
-                <h3 className="hm-category-title">Food Packaging</h3>
-                <p className="hm-category-desc">Food-safe paper bags and packaging solutions for restaurants, bakeries, and food businesses.</p>
+                <h3 className="hm-category-title">Cosmetics & Beauty Paper Bag</h3>
+                <p className="hm-category-desc">Premium paper bag Nepal options for cosmetic shops and beauty brands, enhancing packaging and brand image.</p>
                 <a href="#" className="hm-category-link">View Products</a>
               </div>
             </div>
             <div className="hm-product-category">
               <div className="hm-category-image">
-                <img src="/public/pharmaceutical-bags-category.jpg" alt="Pharmaceutical Bags" />
+                <img src="/public/pharmaceutical-bags-category.jpg" alt="Gifting & Lifestyle Paper Bag" />
               </div>
               <div className="hm-category-content">
-                <h3 className="hm-category-title">Pharmaceutical Bags</h3>
-                <p className="hm-category-desc">Secure and compliant paper bags for pharmacies and medical supply distribution.</p>
+                <h3 className="hm-category-title">Gifting & Lifestyle Paper Bag</h3>
+                <p className="hm-category-desc">Customizable paper bag Nepal choices for gift shops, souvenirs, and lifestyle products, making every gift look special.</p>
                 <a href="#" className="hm-category-link">View Products</a>
               </div>
             </div>
             <div className="hm-product-category">
               <div className="hm-category-image">
-                <img src="/public/industrial-packaging-category.jpg" alt="Industrial Packaging" />
+                <img src="/public/industrial-packaging-category.jpg" alt="Corporate & Promotional Paper Bag" />
               </div>
               <div className="hm-category-content">
-                <h3 className="hm-category-title">Industrial Packaging</h3>
-                <p className="hm-category-desc">Heavy-duty paper bags for industrial applications with reinforced construction.</p>
+                <h3 className="hm-category-title">Corporate & Promotional Paper Bag</h3>
+                <p className="hm-category-desc">Branded paper bag Nepal solutions for events, conferences, and promotional giveaways, creating a professional impact.</p>
                 <a href="#" className="hm-category-link">View Products</a>
               </div>
             </div>
             <div className="hm-product-category">
               <div className="hm-category-image">
-                <img src="/public/custom-printing-category.jpg" alt="Custom Printing" />
+                <img src="/public/custom-printing-category.jpg" alt="Accessories & Retail Paper Bag" />
               </div>
               <div className="hm-category-content">
-                <h3 className="hm-category-title">Custom Printing</h3>
-                <p className="hm-category-desc">Full-color custom printing services with logo placement, brand colors, and design consultation.</p>
+                <h3 className="hm-category-title">Accessories & Retail Paper Bag</h3>
+                <p className="hm-category-desc">Durable and chic paper bag Nepal options for jewelry, watches, and accessory stores, tailored to your brand.</p>
                 <a href="#" className="hm-category-link">View Products</a>
               </div>
             </div>
@@ -240,51 +247,44 @@ export default function Homepage() {
       <section className="hm-biodegradable-section">
         <div className="hm-container">
             <div className="hm-section-header">
-                <h1 className="hm-main-title">Packaging Services</h1>
+                <h2 className="hm-main-title">Packaging Services</h2>
                 <svg className="hm-leaf-icon" viewBox="0 0 24 24" fill="#4a9b5e">
                     <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6L16,12L12,18L8,12L12,6Z"/>
                 </svg>
                 <p className="hm-description">
-                    Our wholesale biodegradable food packaging production mainly including paper food boxes, pastry boxes, transparent fruit and vegetable containers, plastic cups and other packages
+                   At J and J’s Packaging, we provide high-quality packaging box Nepal solutions that protect your products and enhance your brand. From corrugated boxes for shipping to custom and eco-friendly packaging, our solutions are ideal for e-commerce, retail, food, gifting, and corporate businesses.
                 </p>
             </div>
 
             <div className="hm-products-grid">
                 
                 <div className="hm-product-card">
-                    <h2 className="hm-product-title">Disposable Lunch Packaging</h2>
+                    <h3 className="hm-product-title">Corrugated Packaging Box</h3>
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23d4a574'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='Arial' font-size='16'%3ELunch Packaging Image%3C/text%3E%3C/svg%3E" 
-                         alt="Disposable lunch packaging containers with multiple compartments" 
+                         alt="Corrugated Packaging Box" 
                          className="hm-product-image"/>
                     <div className="hm-product-features">
-                        <ul className="hm-feature-list">
-                            <li className="hm-feature-item">Microwaveable and Anti-Fog</li>
-                            <li className="hm-feature-item">More convenience</li>
-                        </ul>
+                        <p>Strong and durable packaging box Nepal solutions designed for shipping, storage, and product protection. Ideal for e-commerce, logistics, and retail.</p>
                     </div>
                 </div>
 
                 <div className="hm-product-card">
-                    <h2 className="hm-product-title">Disposable Salad Container</h2>
+                    <h2 className="hm-product-title">Custom Packaging Box</h2>
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23d4a574'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='Arial' font-size='16'%3ESalad Container Image%3C/text%3E%3C/svg%3E" 
                          alt="Clear disposable salad containers with fresh vegetables" 
                          className="hm-product-image"/>
                     <div className="hm-product-features">
-                        <ul className="hm-feature-list">
-                            <li className="hm-feature-item">Perfect for Green and Healthy</li>
-                        </ul>
+                        <p>Tailor-made packaging box Nepal options with unique designs, sizes, and branding to match your business needs and product identity.</p>
                     </div>
                 </div>
 
                 <div className="hm-product-card">
-                    <h2 className="hm-product-title">Disposable Cutlery</h2>
+                    <h2 className="hm-product-title">Eco-Friendly Packaging</h2>
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%235fb3d8'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23fff' font-family='Arial' font-size='16'%3EDisposable Cutlery Image%3C/text%3E%3C/svg%3E" 
                          alt="White biodegradable cutlery set on blue background" 
                          className="hm-product-image"/>
                     <div className="hm-product-features">
-                        <ul className="hm-feature-list">
-                            <li className="hm-feature-item">Eco-Friendly and disposable</li>
-                        </ul>
+                        <p>Sustainable and recyclable packaging box Nepal choices that protect the environment while giving your brand a modern, responsible image.</p>
                     </div>
                 </div>
             </div>
@@ -295,14 +295,15 @@ export default function Homepage() {
 <section className="ps-services">
   <div className="ps-container">
     <h1 className="ps-section-title">Printing Services</h1>
+    <p className="ps-description">We provide professional printing services Nepal for leaflets, flyers, brochures, visiting cards, and branded stationery to help your business promote effectively.</p>
     <div className="ps-services-grid">
       <div className="ps-service-card">
         <div className="ps-service-image">
           <img src="/public/business-cards.jpg" alt="Business Cards" />
         </div>
         <div className="ps-service-info">
-          <h3 className="ps-service-name">Business Cards</h3>
-          <p className="ps-service-desc">Premium matte and glossy finish business cards with custom designs to suit your brand identity.</p>
+          <h3 className="ps-service-name">Leaflets & Flyers</h3>
+          <p className="ps-service-desc">High-quality printing services Nepal for leaflets and flyers that promote your products and events effectively.</p>
         </div>
       </div>
       <div className="ps-service-card">
@@ -310,8 +311,8 @@ export default function Homepage() {
           <img src="/public/flyers.jpg" alt="Flyers" />
         </div>
         <div className="ps-service-info">
-          <h3 className="ps-service-name">Flyers</h3>
-          <p className="ps-service-desc">High-quality flyers with vibrant colors, available in multiple paper types and finishes.</p>
+          <h3 className="ps-service-name">Brochures & Catalogs</h3>
+          <p className="ps-service-desc">Professional printing services Nepal for brochures and catalogs, helping businesses showcase their products in style.</p>
         </div>
       </div>
       <div className="ps-service-card">
@@ -319,8 +320,8 @@ export default function Homepage() {
           <img src="/public/posters.jpg" alt="Posters" />
         </div>
         <div className="ps-service-info">
-          <h3 className="ps-service-name">Posters</h3>
-          <p className="ps-service-desc">Large format posters for events, promotions, and branding with sharp detail printing.</p>
+          <h3 className="ps-service-name">Visiting Cards</h3>
+          <p className="ps-service-desc">Custom printing services Nepal for visiting cards that create a strong first impression and enhance brand identity.</p>
         </div>
       </div>
       <div className="ps-service-card">
@@ -328,8 +329,8 @@ export default function Homepage() {
           <img src="/public/brochures.jpg" alt="Brochures" />
         </div>
         <div className="ps-service-info">
-          <h3 className="ps-service-name">Brochures</h3>
-          <p className="ps-service-desc">Custom brochures with professional folding and premium paper stock to showcase your business.</p>
+          <h3 className="ps-service-name">Stationery & Promotional Materials</h3>
+          <p className="ps-service-desc">Complete range of printing services Nepal including branded stationery, posters, and promotional materials for marketing campaigns.</p>
         </div>
       </div>
     </div>
@@ -347,15 +348,13 @@ export default function Homepage() {
           <path d="M12 2L12.09 8.26L18 8L12 22L5.91 16.74L6 8L12 2Z" />
         </svg>
 
-        <h1 className="hm-about-title">About Us</h1>
+        <h3 className="hm-about-title">About Us</h3>
 
         <p className="hm-about-description">
-          Lesui company is a research and development, production and sales into
-          a integrated biodegradable food packaging manufacturer. Our state of
-          the art manufacturing Facilities across the region with the latest
-          German technology extend to exceed 60,000 square meters in area. With
-          the annual output reaches more than 60,000 tons, and the annual output
-          value is over 600 million yuan.
+          At J and J’s Packaging, we are a trusted packaging manufacturer in Nepal offering
+           high-quality paper bags, corrugated boxes, custom packaging, and printing services.
+            Our mission is to deliver durable, eco-friendly, and professionally designed solutions
+             that help businesses showcase their products and strengthen their brand.
         </p>
 
         <a href="#" className="hm-view-more-btn">
@@ -395,7 +394,7 @@ export default function Homepage() {
         </div>
         <div className="hm-stat-content">
           <h3>18</h3>
-          <p>18 years Food packaging production</p>
+          <p>18 years of experience in packaging in Nepal.</p>
         </div>
       </div>
 
@@ -407,8 +406,8 @@ export default function Homepage() {
           </svg>
         </div>
         <div className="hm-stat-content">
-          <h3>60,000</h3>
-          <p>Plant area exceeds 60,000 square meters</p>
+          <h3>1300+</h3>
+          <p>1300+ client served till date </p>
         </div>
       </div>
 
@@ -431,76 +430,8 @@ export default function Homepage() {
           </svg>
         </div>
         <div className="hm-stat-content">
-          <h3>6,000,000</h3>
-          <p>6,000,000 million yuan output value</p>
-        </div>
-      </div>
-
-      <div className="hm-stat-item">
-        <div className="hm-stat-icon hm-icon-green">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M3 7V17C3 18.1 3.9 19 5 19H19C20.1 19 21 18.1 21 17V7"
-              stroke="#4CAF50"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M21 7L12 13L3 7"
-              stroke="#4CAF50"
-              strokeWidth="2"
-              fill="none"
-            />
-          </svg>
-        </div>
-        <div className="hm-stat-content">
-          <h3>122</h3>
-          <p>Lesui owns above 122 production lines</p>
-        </div>
-      </div>
-
-      <div className="hm-stat-item">
-        <div className="hm-stat-icon hm-icon-green">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <rect
-              x="3"
-              y="3"
-              width="18"
-              height="18"
-              rx="2"
-              stroke="#4CAF50"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path
-              d="M9 12L11 14L15 10"
-              stroke="#4CAF50"
-              strokeWidth="2"
-              fill="none"
-            />
-          </svg>
-        </div>
-        <div className="hm-stat-content">
-          <h3>60,000</h3>
-          <p>Lesui production capacity of 60,000 tons</p>
-        </div>
-      </div>
-
-      <div className="hm-stat-item">
-        <div className="hm-stat-icon hm-icon-green">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z"
-              stroke="#4CAF50"
-              strokeWidth="2"
-              fill="none"
-            />
-            <path d="M7 10H17M9 14H15" stroke="#4CAF50" strokeWidth="2" />
-          </svg>
-        </div>
-        <div className="hm-stat-content">
-          <h3>100,000</h3>
-          <p>100,000 grade Clear workshop</p>
+          <h3>150+ </h3>
+          <p>150+ packaging category in Nepal</p>
         </div>
       </div>
     </div>
@@ -512,7 +443,7 @@ export default function Homepage() {
 <section>
    <div className="hm-factories-section">
       <div className="hm-overlay">
-        <h1 className="hm-title">Your Company Name</h1>
+        <h1 className="hm-title">JandJ printers</h1>
         <div className="hm-images-container">
           {/* First Image */}
           <div className="hm-image-card">
@@ -683,39 +614,64 @@ export default function Homepage() {
             <div className="hm-contact-info">
               <h2 className="hm-section-title">Get In Touch</h2>
               <p className="hm-contact-text">
-                Ready to create custom paper bags for your business? Connect with us through your preferred platform.
+                Looking for reliable packaging in Nepal? Get in touch with J and J’s Packaging today for custom solutions that fit your business needs..
               </p>
               <div className="hm-contact-details">
                 <div className="hm-contact-item">
-                  <strong>Address:</strong> 123 Industrial Avenue, Kathmandu, Nepal
+                  <strong>Address:</strong>   Sankhamul, Kathmandu, Lalitpur, Nepal
                 </div>
                 <div className="hm-contact-item">
-                  <strong>Phone:</strong> +977-1-234-5678
+                  <strong>Phone:</strong> +9779843223219
                 </div>
                 <div className="hm-contact-item">
-                  <strong>Email:</strong> info@jjprinters.com
+                  <strong>Email:</strong> jandjsprinting@gmail.com
                 </div>
               </div>
             </div>
             <div className="hm-social-media">
               <h3 className="hm-social-title">Follow & Connect</h3>
               <div className="hm-social-icons">
-                <a href="#" className="hm-social-icon hm-facebook">
+                <a href="https://www.facebook.com/paperbagnepalfactory/" className="hm-social-icon hm-facebook">
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
                 </a>
-                <a href="#" className="hm-social-icon hm-instagram">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.342-1.297C4.184 14.795 3.654 13.644 3.654 12.347c0-1.297.53-2.448 1.453-3.342.923-.893 2.045-1.365 3.342-1.365 1.297 0 2.448.472 3.342 1.365.893.894 1.365 2.045 1.365 3.342 0 1.297-.472 2.448-1.365 3.344-.894.807-2.045 1.297-3.342 1.297zm7.718 0c-1.297 0-2.448-.49-3.342-1.297-.894-.896-1.365-2.047-1.365-3.344 0-1.297.471-2.448 1.365-3.342.894-.893 2.045-1.365 3.342-1.365 1.297 0 2.448.472 3.342 1.365.894.894 1.365 2.045 1.365 3.342 0 1.297-.471 2.448-1.365 3.344-.894.807-2.045 1.297-3.342 1.297z"/>
-                  </svg>
-                </a>
-                <a href="#" className="hm-social-icon hm-linkedin">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
-                <a href="#" className="hm-social-icon hm-whatsapp">
+                <a
+  href="https://www.instagram.com/jandj_paper_bag_nepal/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hm-social-icon hm-instagram flex items-center justify-center rounded-full w-10 h-10 border border-gray-400 text-gray-400 hover:text-white transition-all duration-300"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    className="w-5 h-5"
+  >
+    <path
+      d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm6.25.75a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
+    />
+  </svg>
+</a>
+
+
+                <a
+  href="https://maps.app.goo.gl/r1Rq6ZHzzLMwKRQF8"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="hm-social-icon hm-googlemaps flex items-center justify-center rounded-full w-10 h-10 border border-gray-400 text-gray-400 hover:text-white transition-all duration-300"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    fill="currentColor"
+    className="w-5 h-5"
+  >
+    <path d="M256 0C150 0 64 86 64 192c0 135 192 320 192 320s192-185 192-320C448 86 362 0 256 0zm0 272a80 80 0 1 1 0-160 80 80 0 0 1 0 160z"/>
+  </svg>
+</a>
+
+                <a href="https://api.whatsapp.com/send/?phone=9779843223219&text&type=phone_number&app_absent=0" className="hm-social-icon hm-whatsapp">
                   <svg viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                   </svg>

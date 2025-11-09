@@ -2,10 +2,19 @@
 @import '@fortawesome/fontawesome-svg-core/styles.css';
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2&display=swap');
 
-body {
-  font-family: "Baloo 2", sans-serif;
+/* styles/global.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Baloo 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
 
 
 /* @theme inline {

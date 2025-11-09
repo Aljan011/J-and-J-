@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Phone, Mail, ArrowUp } from "lucide-react"; // ✅ iPhone-like icons
+import { Phone, Mail, ArrowUp } from "lucide-react"; //  iPhone-like icons
 
 const FloatingSidebar = () => {
   const [isMinimized, setIsMinimized] = useState(false);
@@ -24,18 +24,18 @@ const FloatingSidebar = () => {
       <div className={`hm-floating-sidebar ${isMinimized ? "hm-minimized" : ""}`}>
         {/* Phone Button */}
         <a
-          href="tel:+1234567890"
+          href="tel:+977 9843223219"
           className="hm-sidebar-btn hm-phone-btn"
-          title="Call us: +1 (234) 567-890"
+          title="Call us: +977 9843223219"
         >
           <Phone size={22} />
         </a>
 
         {/* Email Button */}
         <a
-          href="mailto:info@yourcompany.com"
+          href="mailto:jandjsprinting@gmail.com"
           className="hm-sidebar-btn hm-email-btn"
-          title="Email us: info@yourcompany.com"
+          title="Email us: jandjsprinting@gmail.com"
         >
           <Mail size={22} />
         </a>

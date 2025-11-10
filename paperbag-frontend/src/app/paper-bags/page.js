@@ -1,94 +1,147 @@
 "use client";
 
 import React from "react";
-import "../../styles/paper-bags.css"; 
+import Image from "next/image";
+import "../../styles/paper-bags.css";
 import BlogInternalSection from "@/app/components/BlogInternalSection";
 
 export default function PaperBagsPage() {
-  // 🔹 For now using static product data — easy to replace with Sanity API later
   const products = [
     {
-      title: "Premium Kraft Paper Bag",
-      desc: "Eco-friendly & durable paper bags for retail and gift packing.",
-      img: "/paperbags/bag1.jpg",
-      slug: "premium-kraft-bag",
+      title: "Kraft Paper Bag - Small",
+      desc: "Eco-friendly brown paper bag, perfect for small items and gifts.",
+      img: "/paper-bags/kraft-small.jpg",
+      slug: "kraft-paper-bag-small",
     },
     {
-      title: "Custom Printed Paper Bag",
-      desc: "High-quality print and customizable design for your brand.",
-      img: "/paperbags/bag2.jpg",
+      title: "Kraft Paper Bag - Medium",
+      desc: "Durable and reusable medium-sized kraft paper bag.",
+      img: "/paper-bags/kraft-medium.jpg",
+      slug: "kraft-paper-bag-medium",
+    },
+    {
+      title: "Luxury White Paper Bag",
+      desc: "Premium glossy white bag ideal for boutiques and brand stores.",
+      img: "/paper-bags/luxury-white.jpg",
+      slug: "luxury-white-paper-bag",
+    },
+    {
+      title: "Custom Printed Bag",
+      desc: "Personalize your paper bags with custom logo and design printing.",
+      img: "/paper-bags/custom-printed.jpg",
       slug: "custom-printed-bag",
     },
     {
-      title: "Luxury Gift Paper Bag",
-      desc: "Elegant finish suitable for premium gift packaging.",
-      img: "/paperbags/bag3.jpg",
-      slug: "luxury-gift-bag",
+      title: "Handle Kraft Bag",
+      desc: "Strong handle bags designed for takeaways and retail packaging.",
+      img: "/paper-bags/handle-bag.jpg",
+      slug: "handle-kraft-bag",
     },
     {
-      title: "Handle Paper Bag",
-      desc: "Comfortable carry handles with reinforced strength.",
-      img: "/paperbags/bag4.jpg",
-      slug: "handle-paper-bag",
+      title: "Gift Paper Bag",
+      desc: "Vibrant gift paper bags suitable for all occasions.",
+      img: "/paper-bags/gift-bag.jpg",
+      slug: "gift-paper-bag",
     },
     {
-      title: "Recycled Paper Bag",
-      desc: "Made from 100% recycled materials, eco-conscious choice.",
-      img: "/paperbags/bag5.jpg",
-      slug: "recycled-paper-bag",
+      title: "Colored Paper Bag Set",
+      desc: "Stylish multi-color paper bag pack for decorative or shop use.",
+      img: "/paper-bags/colored-set.jpg",
+      slug: "colored-paper-bag-set",
     },
     {
-      title: "Brown Paper Lunch Bag",
-      desc: "Perfect for lunches and snacks, biodegradable and sturdy.",
-      img: "/paperbags/bag6.jpg",
-      slug: "brown-lunch-bag",
+      title: "Eco Recycled Bag",
+      desc: "Made entirely from recycled materials for sustainable packaging.",
+      img: "/paper-bags/eco-recycled.jpg",
+      slug: "eco-recycled-bag",
     },
-    {
-      title: "White Paper Shopping Bag",
-      desc: "Clean and simple design for everyday shopping needs.",
-      img: "/paperbags/bag7.jpg",
-      slug: "white-shopping-bag",
-    },
-    {
-      title: "Colored Paper Bag",
-      desc: "Vibrant colors to make your packaging stand out.",
-      img: "/paperbags/bag8.jpg",
-      slug: "colored-paper-bag",
-    },
-    {
-      title: "Large Capacity Paper Bag",
-      desc: "Spacious design for bulkier items, strong and reliable.",
-      img: "/paperbags/bag9.jpg",
-      slug: "large-capacity-bag",
-    }
   ];
 
   return (
     <>
-    <section className="pb-products">
-      <div className="pb-container">
-        <h2 className="pb-section-title">Paper Bags</h2>
-
-        <div className="pb-products-grid">
-          {products.map((item, index) => (
-            <div className="pb-product-card" key={index}>
-              <div className="pb-product-image">
-                <img src={item.img} alt={item.title} />
-              </div>
-              <div className="pb-product-content">
-                <h3 className="pb-product-title">{item.title}</h3>
-                <p className="pb-product-desc">{item.desc}</p>
-                <a className="pb-product-link" href={`/paperbags/${item.slug}`}>
-                  View Details
-                </a>
-              </div>
+      <main className="pb-page page-offset">
+        {/* HERO SECTION */}
+        <section className="pb-hero" aria-labelledby="pb-hero-title">
+          <div className="pb-hero-inner">
+            <div className="pb-hero-text">
+              <h1 id="pb-hero-title" className="pb-hero-title">
+                Premium Paper Bags
+              </h1>
+              <p className="pb-hero-sub">
+                Discover our eco-friendly and customizable paper bags — ideal
+                for packaging, gifting, and branding with a sustainable touch.
+              </p>
+              <a href="#pb-products" className="pb-hero-cta">
+                Explore Products
+              </a>
             </div>
-          ))}
-        </div>
 
-      </div>
-    </section>
-<BlogInternalSection />
+            <div
+              className="pb-hero-img"
+              role="img"
+              aria-label="Paper bags hero image"
+            >
+              <Image
+                src="/paper-bags/hero.webp"
+                alt="Various eco-friendly paper bags"
+                width={700}
+                height={490}
+                priority={true}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: 14,
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* PRODUCTS SECTION */}
+        <section id="pb-products" className="pb-products">
+          <div className="pb-products-inner">
+            <h2 className="pb-section-title">Our Paper Bag Collection</h2>
+
+            <div className="pb-products-grid">
+              {products.map((p, i) => (
+                <article className="pb-card" key={i}>
+                  <div className="pb-card-image">
+                    <Image
+                      src={p.img}
+                      alt={p.title}
+                      width={800}
+                      height={520}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 48vw, 30vw"
+                    />
+                  </div>
+
+                  <div className="pb-card-body">
+                    <h3 className="pb-card-title">{p.title}</h3>
+                    <p className="pb-card-desc">{p.desc}</p>
+
+                    <div className="pb-card-actions">
+                      <a href={`/paper-bags/${p.slug}`} className="pb-link">
+                        View details
+                      </a>
+                      <a href="/contact" className="pb-cta">
+                        Rs 150 - Rs 350
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <BlogInternalSection />
     </>
   );
 }

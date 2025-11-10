@@ -1,247 +1,192 @@
-/* ===========================
-   Printing Supplies - Mobile-first
-   Unique namespace: ps-*
-   Optimized for mobile (10-12 products)
-   =========================== */
-
-/* Page wrapper: use .page-offset globally to tune distance from nav */
+/* ✅ Printing Supplies Page */
 .ps-page {
-  width: 100%;
-  background: #fafbfb;
-  color: #263238;
-  /* font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; */
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f1f2f6 0%, #eaf0ea 100%);
 }
 
-/* ================= HERO ================= */
+/* ✅ Hero Section */
 .ps-hero {
-  width: 100%;
-  padding: 20px 6%;
-  background: linear-gradient(135deg, #f8fafb 0%, #eef3f5 100%);
+  padding: 100px 0 70px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #f9fafb;
 }
 
 .ps-hero-inner {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column; /* mobile stacked */
-  gap: 18px;
+  width: 90%;
+  max-width: 1250px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
   align-items: center;
-}
-
-/* text first */
-.ps-hero-text {
-  text-align: center;
-  max-width: 720px;
 }
 
 .ps-hero-title {
-  font-size: 1.6rem;
-  margin: 0 0 8px;
-  font-weight: 700;
-  color: #1f2933;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #2c3e50;
+  margin-bottom: 18px;
 }
 
 .ps-hero-sub {
-  font-size: 0.98rem;
-  color: #4b5563;
-  margin: 0 0 14px;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 24px;
 }
 
-/* CTA */
 .ps-hero-cta {
-  display: inline-block;
   background: #27ae60;
   color: white;
-  padding: 10px 18px;
-  border-radius: 999px;
   font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(39,174,96,0.12);
+  transition: 0.3s ease;
 }
 
-/* hero image (mobile small, but visible, constrained height) */
+.ps-hero-cta:hover {
+  background: #229954;
+  transform: translateY(-3px);
+}
+
 .ps-hero-img {
-  width: 100%;
-  max-width: 900px;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
 }
 
-/* ================= PRODUCTS ================= */
+/* ✅ Products */
 .ps-products {
-  padding: 18px 6% 60px;
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f1f2f6 0%, #dfe4ea 100%);
 }
 
 .ps-products-inner {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 90%;
+  max-width: 1350px;
+  margin: auto;
 }
 
 .ps-section-title {
-  font-size: 1.25rem;
-  margin: 6px 0 18px;
-  font-weight: 700;
-  color: #1f2933;
-  text-align: left;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 50px;
+  color: #2c3e50;
 }
 
-/* Grid: mobile first uses 2 columns (large cards) */
+/* ✅ Grid & Cards */
 .ps-products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
 }
 
-/* Card */
 .ps-card {
-  background: #ffffff;
-  border-radius: 14px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  box-shadow: 0 10px 28px rgba(12, 20, 30, 0.06);
-  transition: transform 250ms ease, box-shadow 250ms ease;
+  transition: 0.4s ease;
 }
 
 .ps-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(12, 20, 30, 0.09);
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
 }
 
-/* Image area: keeps consistent height */
 .ps-card-image {
-  width: 100%;
-  height: 160px; /* mobile-friendly fixed height */
+  height: 240px;
   overflow: hidden;
 }
 
-/* Card body */
+.ps-card-image img {
+  transition: 0.4s ease;
+}
+
+.ps-card:hover .ps-card-image img {
+  transform: scale(1.05);
+}
+
 .ps-card-body {
-  padding: 14px 16px 16px;
+  padding: 28px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  flex: 1;
 }
 
 .ps-card-title {
-  font-size: 1rem;
-  margin: 0;
-  color: #0f1720;
+  font-size: 1.3rem;
   font-weight: 700;
+  margin-bottom: 10px;
+  color: #2c3e50;
 }
 
 .ps-card-desc {
-  margin: 0;
-  color: #475569;
-  font-size: 0.92rem;
-  line-height: 1.4;
-  flex: 1;
+  flex-grow: 1;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 18px;
 }
 
-/* Actions: left link + right CTA */
 .ps-card-actions {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  margin-top: 6px;
 }
 
-/* subtle link */
 .ps-link {
+  font-weight: 600;
   color: #27ae60;
   text-decoration: none;
-  font-weight: 600;
+  transition: 0.3s;
 }
 
-/* CTA button */
+.ps-link:hover {
+  transform: translateX(5px);
+  color: #229954;
+}
+
 .ps-cta {
-  margin-left: auto;
   background: #27ae60;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 6px;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 0.9rem;
+  transition: 0.3s;
 }
 
-/* ================= Larger screens (tablet) ================= */
-@media (min-width: 700px) {
-  .ps-hero-inner {
-    flex-direction: row;
-    align-items: center;
-    gap: 28px;
-  }
+.ps-cta:hover {
+  background: #229954;
+}
 
-  .ps-hero-text {
-    text-align: left;
-    flex: 1;
+/* ✅ Responsive */
+@media (max-width: 1024px) {
+  .ps-hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
   .ps-hero-img {
-    flex: 1;
+    order: -1;
   }
 
-  /* product grid -> 3 columns on tablet */
+  .ps-hero-title {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 480px) {
   .ps-products-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
   }
 
   .ps-card-image {
     height: 180px;
   }
-
-  .ps-hero-title {
-    font-size: 2.0rem;
-  }
-}
-
-/* ================= Desktop ================= */
-@media (min-width: 1100px) {
-  .ps-hero-inner {
-    gap: 40px;
-  }
-
-  /* 4 columns for large screens (shows more products without crowding) */
-  .ps-products-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-  }
-
-  .ps-card-image {
-    height: 200px;
-  }
-
-  .ps-section-title {
-    font-size: 1.35rem;
-  }
-}
-
-/* ================= Accessibility / Small helpers ================= */
-.ps-page img {
-  display: block;
-}
-
-/* Utility: reduce top offset for pages where nav is not fixed */
-.page-offset {
-  padding-top: 60px; /* tweak to match your navbar height */
-}
-
-/* Small screens tweak: ensure hero area doesn't dominate */
-@media (max-height: 680px) and (max-width: 480px) {
-  .ps-hero {
-    padding-top: 18px;
-    padding-bottom: 18px;
-  }
-  .ps-hero-img { max-height: 45vh; }
 }

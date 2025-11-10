@@ -41,7 +41,7 @@ export default function CheckoutPage() {
     }
 
     // Later → Send data to backend & connect eSewa
-    alert("Order placed! eSewa integration coming soon ✅");
+    alert("Order placed! eSewa integration coming soon ");
     router.push("/order-success");
   };
 

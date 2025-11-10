@@ -1,68 +1,147 @@
 "use client";
 
 import React from "react";
-import "../../styles/packaging-services.css"; 
+import Image from "next/image";
+import "../../styles/packaging-services.css";
 import BlogInternalSection from "@/app/components/BlogInternalSection";
 
 export default function PackagingServicesPage() {
-  const services = [
+  const products = [
     {
-      title: "Custom Box Packaging",
-      desc: "Durable & fully customizable box packaging tailored for your brand.",
-      img: "/packaging-services/service1.jpg",
-      slug: "custom-box-packaging",
+      title: "Corrugated Shipping Box",
+      desc: "Durable and eco-friendly corrugated boxes ideal for shipping goods.",
+      img: "/packaging-services/corrugated-box.jpg",
+      slug: "corrugated-shipping-box",
     },
     {
-      title: "Food Grade Packaging",
-      desc: "Certified safe packaging solutions for food & beverages.",
-      img: "/packaging-services/service2.jpg",
-      slug: "food-grade-packaging",
+      title: "Bubble Wrap Roll",
+      desc: "Protect your fragile items with high-quality air bubble cushioning.",
+      img: "/packaging-services/bubble-wrap.jpg",
+      slug: "bubble-wrap-roll",
     },
     {
-      title: "Retail Packaging Design",
-      desc: "High-quality packaging that enhances shelf appeal and branding.",
-      img: "/packaging-services/service3.jpg",
-      slug: "retail-packaging-design",
+      title: "Stretch Film Roll",
+      desc: "Strong cling film for pallet wrapping and secure packaging.",
+      img: "/packaging-services/stretch-film.jpg",
+      slug: "stretch-film-roll",
     },
     {
-      title: "Eco-Friendly Packaging",
-      desc: "Sustainable production using recyclable and biodegradable materials.",
-      img: "/packaging-services/service4.jpg",
-      slug: "eco-friendly-packaging",
+      title: "Packaging Tape - Clear",
+      desc: "Industrial strength tape for sealing and labeling packages.",
+      img: "/packaging-services/tape-clear.jpg",
+      slug: "packaging-tape-clear",
     },
     {
-        title: "Industrial Packaging Solutions",
-        desc: "Robust packaging designed for heavy-duty industrial applications.",
-        img: "/packaging-services/service5.jpg",
-        slug: "industrial-packaging-solutions",
-    }
+      title: "Kraft Wrapping Paper",
+      desc: "Eco kraft wrapping sheets for wrapping and protection.",
+      img: "/packaging-services/kraft-paper.jpg",
+      slug: "kraft-wrapping-paper",
+    },
+    {
+      title: "Foam Sheet Roll",
+      desc: "Soft foam padding roll to protect delicate items during transit.",
+      img: "/packaging-services/foam-sheet.jpg",
+      slug: "foam-sheet-roll",
+    },
+    {
+      title: "Plastic Courier Bag",
+      desc: "Lightweight tamper-proof courier bags for e-commerce parcels.",
+      img: "/packaging-services/courier-bag.jpg",
+      slug: "plastic-courier-bag",
+    },
+    {
+      title: "Strapping Roll & Buckle Set",
+      desc: "Heavy-duty strapping roll for box bundling and load securing.",
+      img: "/packaging-services/strapping-roll.jpg",
+      slug: "strapping-roll-buckle",
+    },
   ];
 
   return (
     <>
-    <section className="ps-services">
-      <div className="ps-container">
-        <h2 className="ps-section-title">Packaging Services</h2>
-
-        <div className="ps-grid">
-          {services.map((item, index) => (
-            <div className="ps-card" key={index}>
-              <div className="ps-image">
-                <img src={item.img} alt={item.title} />
-              </div>
-              <div className="ps-content">
-                <h3 className="ps-title">{item.title}</h3>
-                <p className="ps-desc">{item.desc}</p>
-                <a className="ps-link" href={`/packaging-services/${item.slug}`}>
-                  Learn More →
-                </a>
-              </div>
+      <main className="pk-page page-offset">
+        {/* HERO SECTION */}
+        <section className="pk-hero" aria-labelledby="pk-hero-title">
+          <div className="pk-hero-inner">
+            <div className="pk-hero-text">
+              <h1 id="pk-hero-title" className="pk-hero-title">
+                Complete Packaging Solutions
+              </h1>
+              <p className="pk-hero-sub">
+                From boxes to wraps, discover our reliable packaging products
+                designed for strength, sustainability, and professional appeal.
+              </p>
+              <a href="#pk-products" className="pk-hero-cta">
+                Explore Products
+              </a>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-    <BlogInternalSection />
+
+            <div
+              className="pk-hero-img"
+              role="img"
+              aria-label="Packaging services hero image"
+            >
+              <Image
+                src="/packaging-services/hero.webp"
+                alt="Packaging materials and tools"
+                width={700}
+                height={490}
+                priority={true}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: 14,
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* PRODUCTS SECTION */}
+        <section id="pk-products" className="pk-products">
+          <div className="pk-products-inner">
+            <h2 className="pk-section-title">Our Packaging Range</h2>
+
+            <div className="pk-products-grid">
+              {products.map((p, i) => (
+                <article className="pk-card" key={i}>
+                  <div className="pk-card-image">
+                    <Image
+                      src={p.img}
+                      alt={p.title}
+                      width={800}
+                      height={520}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 48vw, 30vw"
+                    />
+                  </div>
+
+                  <div className="pk-card-body">
+                    <h3 className="pk-card-title">{p.title}</h3>
+                    <p className="pk-card-desc">{p.desc}</p>
+
+                    <div className="pk-card-actions">
+                      <a href={`/packaging-services/${p.slug}`} className="pk-link">
+                        View details
+                      </a>
+                      <a href="/contact" className="pk-cta">
+                        Rs 200 - Rs 500
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <BlogInternalSection />
     </>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import { sanityClient, urlFor } from "../../../../lib/sanity.js";
-import ProductGallery from "@/app/components/ProductGallery";
-import ProductDetailsClient from "@/app/components/ProductDetailsClient";
 import "../../../styles/product-details/product-details.css";
+
+import ProductContainer from "@/app/components/PrintingSupplies/[slug]/ProductContainer.jsx";
 
 export default async function ProductDetailPage({ params }) {
   const { slug } = params;
@@ -12,7 +12,29 @@ export default async function ProductDetailPage({ params }) {
   let product = await sanityClient.fetch(query, { slug });
 
   if (!product) {
-    product = { /* fallback object */ };
+    product = {
+      _id: "sample-1",
+      title: "Sample Paper Bag",
+      slug: { current: slug || "sample-paper-bag" },
+      price: "120",
+      currency: "NPR",
+      sku: "PB-001",
+      shortDescription: "High-quality kraft paper bag for retail use.",
+      description:
+        "<p>This paper bag is durable, eco-friendly, and perfect for gifting or shopping.</p>",
+      features: ["Eco-friendly kraft material", "Strong handles", "Multiple sizes available"],
+      specs: [
+        { key: "Material", value: "Kraft paper" },
+        { key: "Capacity", value: "Up to 5 kg" },
+        { key: "Dimensions", value: "Various sizes" },
+      ],
+      mainImage: { asset: { url: "/paper-bags/paperbag1.jpg" } },
+      images: [
+        { asset: { url: "/paper-bags/paperbag1.jpg" } },
+        { asset: { url: "/paper-bags/paperbag2.jpg" } },
+        { asset: { url: "/paper-bags/paperbag3.jpg" } },
+      ],
+    };
   }
 
   const images = [
@@ -22,29 +44,7 @@ export default async function ProductDetailPage({ params }) {
 
   return (
     <main className="pd-page">
-      <div className="pd-container">
-        <nav className="pd-breadcrumbs">
-          <a href="/">Home</a> / <a href="/product">Products</a> / <span>{product.title}</span>
-        </nav>
-
-        <section className="pd-top">
-          <div className="pd-gallery-wrap">
-            <ProductGallery images={images} />
-          </div>
-          <ProductDetailsClient product={product} />
-        </section>
-
-        <section className="pd-info">
-          <div className="pd-desc">
-            <h2>Product Description</h2>
-            <div dangerouslySetInnerHTML={{ __html: product.description || "<p>No description.</p>" }} />
-          </div>
-          <div className="pd-specs">
-            <h2>Specifications</h2>
-            {/* Specs table and features list */}
-          </div>
-        </section>
-      </div>
+      <ProductContainer product={product} images={images} />
     </main>
   );
 }

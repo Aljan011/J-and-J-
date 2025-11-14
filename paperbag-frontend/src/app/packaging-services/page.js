@@ -1,9 +1,11 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import "../../styles/packaging-services.css";
+
 import BlogInternalSection from "@/app/components/BlogInternalSection";
+import HeroSection from "./../components/PackagingServices/HeroSection.jsx";
+import ProductSection from "./../components/PackagingServices/ProductSection.jsx";
 
 export default function PackagingServicesPage() {
   const products = [
@@ -60,85 +62,10 @@ export default function PackagingServicesPage() {
   return (
     <>
       <main className="pk-page page-offset">
-        {/* HERO SECTION */}
-        <section className="pk-hero" aria-labelledby="pk-hero-title">
-          <div className="pk-hero-inner">
-            <div className="pk-hero-text">
-              <h1 id="pk-hero-title" className="pk-hero-title">
-                Complete Packaging Solutions
-              </h1>
-              <p className="pk-hero-sub">
-                From boxes to wraps, discover our reliable packaging products
-                designed for strength, sustainability, and professional appeal.
-              </p>
-              <a href="#pk-products" className="pk-hero-cta">
-                Explore Products
-              </a>
-            </div>
-
-            <div
-              className="pk-hero-img"
-              role="img"
-              aria-label="Packaging services hero image"
-            >
-              <Image
-                src="/packaging-services/hero.webp"
-                alt="Packaging materials and tools"
-                width={700}
-                height={490}
-                priority={true}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: 14,
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* PRODUCTS SECTION */}
-        <section id="pk-products" className="pk-products">
-          <div className="pk-products-inner">
-            <h2 className="pk-section-title">Our Packaging Range</h2>
-
-            <div className="pk-products-grid">
-              {products.map((p, i) => (
-                <article className="pk-card" key={i}>
-                  <div className="pk-card-image">
-                    <Image
-                      src={p.img}
-                      alt={p.title}
-                      width={800}
-                      height={520}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 48vw, 30vw"
-                    />
-                  </div>
-
-                  <div className="pk-card-body">
-                    <h3 className="pk-card-title">{p.title}</h3>
-                    <p className="pk-card-desc">{p.desc}</p>
-
-                    <div className="pk-card-actions">
-                      <a href={`/packaging-services/${p.slug}`} className="pk-link">
-                        View details
-                      </a>
-                      <a href="/contact" className="pk-cta">
-                        Rs 200 - Rs 500
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+       
+       < HeroSection />
+       < ProductSection products={products} />
+        
       </main>
 
       <BlogInternalSection />

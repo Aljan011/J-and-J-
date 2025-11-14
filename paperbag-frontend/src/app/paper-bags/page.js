@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import "../../styles/paper-bags.css";
+
 import BlogInternalSection from "@/app/components/BlogInternalSection";
+import HeroSection from "./../components/PaperBag/HeroSection.jsx";
+import ProductDetails from "./../components/PaperBag/ProductDetails.jsx";
+
 
 export default function PaperBagsPage() {
   const products = [
@@ -60,85 +63,10 @@ export default function PaperBagsPage() {
   return (
     <>
       <main className="pb-page page-offset">
-        {/* HERO SECTION */}
-        <section className="pb-hero" aria-labelledby="pb-hero-title">
-          <div className="pb-hero-inner">
-            <div className="pb-hero-text">
-              <h1 id="pb-hero-title" className="pb-hero-title">
-                Premium Paper Bags
-              </h1>
-              <p className="pb-hero-sub">
-                Discover our eco-friendly and customizable paper bags — ideal
-                for packaging, gifting, and branding with a sustainable touch.
-              </p>
-              <a href="#pb-products" className="pb-hero-cta">
-                Explore Products
-              </a>
-            </div>
+        
+        < HeroSection />
+        < ProductDetails products={products} />
 
-            <div
-              className="pb-hero-img"
-              role="img"
-              aria-label="Paper bags hero image"
-            >
-              <Image
-                src="/paper-bags/hero.webp"
-                alt="Various eco-friendly paper bags"
-                width={700}
-                height={490}
-                priority={true}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: 14,
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* PRODUCTS SECTION */}
-        <section id="pb-products" className="pb-products">
-          <div className="pb-products-inner">
-            <h2 className="pb-section-title">Our Paper Bag Collection</h2>
-
-            <div className="pb-products-grid">
-              {products.map((p, i) => (
-                <article className="pb-card" key={i}>
-                  <div className="pb-card-image">
-                    <Image
-                      src={p.img}
-                      alt={p.title}
-                      width={800}
-                      height={520}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 48vw, 30vw"
-                    />
-                  </div>
-
-                  <div className="pb-card-body">
-                    <h3 className="pb-card-title">{p.title}</h3>
-                    <p className="pb-card-desc">{p.desc}</p>
-
-                    <div className="pb-card-actions">
-                      <a href={`/paper-bags/${p.slug}`} className="pb-link">
-                        View details
-                      </a>
-                      <a href="/contact" className="pb-cta">
-                        Rs 150 - Rs 350
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
       </main>
 
       <BlogInternalSection />

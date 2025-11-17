@@ -38,16 +38,55 @@ export default function CheckoutPage() {
     setForm({ ...form, [name]: value });
   };
 
-  const placeOrder = () => {
-    if (!form.firstName || !form.lastName || !form.phone || !form.street) {
-      alert("Please fill all required fields (*)");
+  const placeOrder = async () => {
+  if (!form.firstName || !form.lastName || !form.phone || !form.street) {
+    alert("Please fill all required fields (*)");
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/payment/initiate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: subtotal,
+        customer: form,
+        cart,
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.json();
+      alert(err.error || "Payment failed");
       return;
     }
 
-    // Later → Send data to backend & connect eSewa
-    alert("Order placed! eSewa integration coming soon ");
-    router.push("/order-success");
-  };
+    const { paymentUrl, params } = await response.json();
+
+    // Auto-submit eSewa form  
+    const formElement = document.createElement("form");
+    formElement.method = "POST";
+    formElement.action = paymentUrl;
+    formElement.style.display = "none";
+
+    const addField = (name, value) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      formElement.appendChild(input);
+    };
+
+    Object.entries(params).forEach(([key, value]) => addField(key, value));
+
+    document.body.appendChild(formElement);
+    formElement.submit();
+  } catch (err) {
+    console.error("Esewa Error:", err);
+    alert("Payment error!");
+  }
+};
+
 
   if (cart.length === 0) {
     return (

@@ -3,9 +3,9 @@
 import React from "react";
 import "../../styles/printing-services.css";
 
-import BlogInternalSection from "@/app/components/BlogInternalSection";
-import HeroSection from "./../components/PrintingSupplies/HeroSection.jsx";
-import ProductContainer from "./../components/PrintingSupplies/ProductContainer.jsx";
+import BlogInternalSection from "../../components/BlogInternalSection.jsx";
+import HeroSection from "../../components/PrintingSupplies/HeroSection.jsx";
+import ProductContainer from "../../components/PrintingSupplies/ProductContainer.jsx";
 
 export default function PrintingSuppliesPage() {
   // 12 sample products (update image paths to real images in /public/printing-supplies/)

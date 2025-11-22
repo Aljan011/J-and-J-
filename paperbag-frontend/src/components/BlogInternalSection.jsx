@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { createClient } from "next-sanity";
-import "../../styles/components/BlogInternal.css"
+import "../styles/components/BlogInternal.css";
 
 const sanity = createClient({
   projectId: "jz6c1suz", 

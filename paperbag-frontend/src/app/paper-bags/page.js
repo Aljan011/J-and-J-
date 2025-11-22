@@ -3,9 +3,9 @@
 import React from "react";
 import "../../styles/paper-bags.css";
 
-import BlogInternalSection from "@/app/components/BlogInternalSection";
-import HeroSection from "./../components/PaperBag/HeroSection.jsx";
-import ProductDetails from "./../components/PaperBag/ProductDetails.jsx";
+import BlogInternalSection from "../../components/BlogInternalSection.jsx";
+import HeroSection from "../../components/PaperBag/HeroSection.jsx";
+import ProductDetails from "../../components/PaperBag/ProductDetails.jsx";
 
 
 export default function PaperBagsPage() {

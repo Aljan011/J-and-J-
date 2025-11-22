@@ -5,16 +5,16 @@ import "@fontsource/baloo-2/400.css";
 
 import React from "react";
 
-import HeroSection from "./components/HomePage/HeroSection.jsx";
-import ClientSection from "./components/HomePage/ClientSection.jsx";  
-import OurServices from "./components/HomePage/OurServices.jsx";
-import PaperBags from "./components/HomePage/PaperBags.jsx";
-import PackagingServices from "./components/HomePage/PackagingServices.jsx";
-import PrintingServices from "./components/HomePage/PrintingServices.jsx";
-import AboutUsSection from "./components/HomePage/AboutUsSection.jsx";
-import ImageSection from "./components/HomePage/ImageSection.jsx";
-import BlogSection from "./components/HomePage/BlogSection.jsx";
-import ContactSection from "./components/HomePage/Contact.jsx";
+import HeroSection from "../components/HomePage/HeroSection.jsx";
+import ClientSection from "../components/HomePage/ClientSection.jsx";  
+import OurServices from "../components/HomePage/OurServices.jsx";
+import PaperBags from "../components/HomePage/PaperBags.jsx";
+import PackagingServices from "../components/HomePage/PackagingServices.jsx";
+import PrintingServices from "../components/HomePage/PrintingServices.jsx";
+import AboutUsSection from "../components/HomePage/AboutUsSection.jsx";
+import ImageSection from "../components/HomePage/ImageSection.jsx";
+import BlogSection from "../components/HomePage/BlogSection.jsx";
+import ContactSection from "../components/HomePage/Contact.jsx";
 
 const hmClientsData = [
     { name: 'CaRaRu', logo: '/api/placeholder/120/60' },

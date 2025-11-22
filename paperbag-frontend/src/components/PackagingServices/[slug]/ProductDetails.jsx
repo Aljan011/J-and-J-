@@ -1,7 +1,7 @@
 import React from 'react'
 
-import ProductGallery from "@/app/components/ProductGallery";
-import ProductDetailsClient from "@/app/components/ProductDetailsClient";
+import ProductGallery from "../../ProductGallery.jsx";
+import ProductDetailsClient from "../../ProductDetailsClient.jsx";
 
 function ProductDetails( { product, images = [] } ) {
   return (

@@ -3,9 +3,9 @@
 import React from "react";
 import "../../styles/packaging-services.css";
 
-import BlogInternalSection from "@/app/components/BlogInternalSection";
-import HeroSection from "./../components/PackagingServices/HeroSection.jsx";
-import ProductSection from "./../components/PackagingServices/ProductSection.jsx";
+import BlogInternalSection from "../../components/BlogInternalSection.jsx";
+import HeroSection from "../../components/PackagingServices/HeroSection.jsx";
+import ProductSection from "../../components/PackagingServices/ProductSection.jsx";
 
 export default function PackagingServicesPage() {
   const products = [

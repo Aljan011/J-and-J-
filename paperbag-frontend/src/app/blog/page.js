@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import "./../../styles/blog.css";
 import { createClient } from "next-sanity";
 
-import ProductsFilter from "./../components/Blog/ProductsFilter.jsx";
-import PaginationSection from "./../components/Blog/PaginationSection.jsx";
-import BlogCard from "./../components/Blog/BlogCard.jsx";
+import ProductsFilter from "../../components/Blog/ProductsFilter.jsx";
+import PaginationSection from "../../components/Blog/PaginationSection.jsx";
+import BlogCard from "../../components/Blog/BlogCard.jsx";
 
 //  setup sanity client 
 const sanityClient = createClient({

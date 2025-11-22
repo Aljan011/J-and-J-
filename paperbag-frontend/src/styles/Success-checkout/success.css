@@ -1,0 +1,37 @@
+/* styles/checkout.css */
+
+.checkout-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.billing-section, .order-summary {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.billing-section ul, .order-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.billing-section li, .order-summary li {
+  padding: 6px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.billing-section li:last-child, .order-summary li:last-child {
+  border-bottom: none;
+}
+
+h1, h2, h3 {
+  color: #111827;
+}

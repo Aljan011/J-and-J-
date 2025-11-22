@@ -1,13 +1,15 @@
 import React from 'react'
 
-import ProductGallery from "@/app/components/ProductGallery";
-import ProductDetailsClient from "@/app/components/ProductDetailsClient";
+import ProductGallery from "../ProductGallery.jsx";
+import ProductDetailsClient from "../ProductDetailsClient.jsx";
 
 function ProductContainer( { product, images = [] } ) {
   return (
     <div className="pd-container">
-        <nav className="pd-breadcrumbs">
-          <a href="/">Home</a> / <a href="/product">Products</a> / <span>{product.title}</span>
+        <nav className="pd-breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a> <span>/</span>
+          <a href="/paper-bags">Paper Bags</a> <span>/</span>
+          <span>{product.title}</span>
         </nav>
 
         <section className="pd-top">
@@ -20,10 +22,13 @@ function ProductContainer( { product, images = [] } ) {
         <section className="pd-info">
           <div className="pd-desc">
             <h2>Product Description</h2>
-            <div dangerouslySetInnerHTML={{ __html: product.description || "<p>No description.</p>" }} />
+            <div
+              className="pd-desc-body"
+              dangerouslySetInnerHTML={{ __html: product.description || "<p>No description available.</p>" }}
+            />
           </div>
+
           <div className="pd-specs">
-            <h2>Specifications</h2>
             <h2>Specifications</h2>
             {Array.isArray(product.specs) && product.specs.length ? (
               <table className="pd-specs-table">

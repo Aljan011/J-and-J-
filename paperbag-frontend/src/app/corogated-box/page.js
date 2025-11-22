@@ -2,7 +2,7 @@
 
 import React from "react";
 import "../../styles/corogated-box.css"; 
-import BlogInternalSection from "@/app/components/BlogInternalSection";
+import BlogInternalSection from "@/components/BlogInternalSection";
 
 export default function CorrugatedBoxPage() {
   const products = [

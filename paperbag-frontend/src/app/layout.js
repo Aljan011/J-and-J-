@@ -13,8 +13,8 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css'; // Import the CSS manually
 config.autoAddCss = false; // Prevent FontAwesome from adding the CSS automatically
 
-import TopBar from './components/MenuBar/TopBar';
-import FooterSection from './components/MenuBar/FooterSection';
+import TopBar from '../components/MenuBar/TopBar';
+import FooterSection from '../components/MenuBar/FooterSection';
 
 export default function RootLayout({ children }) {
 

@@ -4,9 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import "../../styles/checkout.css";
-
-import BillingForm from "./../components/Checkout/BillingForm.jsx";
-import OrderSummary from "./../components/Checkout/OrderSummary.jsx";
+import BillingForm from "../../components/Checkout/BillingForm.jsx";
+import OrderSummary from "../../components/Checkout/OrderSummary.jsx";
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -28,8 +27,9 @@ export default function CheckoutPage() {
     if (stored) setCart(JSON.parse(stored));
   }, []);
 
+  // subtotal uses price * qty for each line
   const subtotal = cart.reduce(
-    (sum, item) => sum + Number(item.price) * Number(item.qty),
+    (sum, item) => sum + Number(item.price || 0) * Number(item.qty || 1),
     0
   );
 
@@ -39,54 +39,57 @@ export default function CheckoutPage() {
   };
 
   const placeOrder = async () => {
-  if (!form.firstName || !form.lastName || !form.phone || !form.street) {
-    alert("Please fill all required fields (*)");
-    return;
-  }
-
-  try {
-    const response = await fetch("/api/payment/initiate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        amount: subtotal,
-        customer: form,
-        cart,
-      }),
-    });
-
-    if (!response.ok) {
-      const err = await response.json();
-      alert(err.error || "Payment failed");
+    if (!form.firstName || !form.lastName || !form.phone || !form.street) {
+      alert("Please fill all required fields (*)");
       return;
     }
 
-    const { paymentUrl, params } = await response.json();
+    try {
+      const orderData = { customer: form, cart, subtotal };
 
-    // Auto-submit eSewa form  
-    const formElement = document.createElement("form");
-    formElement.method = "POST";
-    formElement.action = paymentUrl;
-    formElement.style.display = "none";
+      // Store order first
+      await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData),
+      });
 
-    const addField = (name, value) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      formElement.appendChild(input);
-    };
+      // Initiate eSewa payment
+      const response = await fetch("/api/payment/initiate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: subtotal, cart, billing: form }),
+      });
 
-    Object.entries(params).forEach(([key, value]) => addField(key, value));
+      if (!response.ok) {
+        const err = await response.json();
+        alert(err.error || "Payment failed");
+        return;
+      }
 
-    document.body.appendChild(formElement);
-    formElement.submit();
-  } catch (err) {
-    console.error("Esewa Error:", err);
-    alert("Payment error!");
-  }
-};
+      const { paymentUrl, params } = await response.json();
 
+      // Create hidden form to submit to eSewa
+      const formElement = document.createElement("form");
+      formElement.method = "POST";
+      formElement.action = paymentUrl;
+      formElement.style.display = "none";
+
+      Object.entries(params).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = value;
+        formElement.appendChild(input);
+      });
+
+      document.body.appendChild(formElement);
+      formElement.submit();
+    } catch (err) {
+      console.error("eSewa Payment Error:", err);
+      alert("Payment error!");
+    }
+  };
 
   if (cart.length === 0) {
     return (
@@ -105,10 +108,8 @@ export default function CheckoutPage() {
   return (
     <main className="checkout-page">
       <div className="checkout-container">
-
         <BillingForm form={form} handleChange={handleChange} />
         <OrderSummary cart={cart} subtotal={subtotal} placeOrder={placeOrder} />
-        
       </div>
     </main>
   );

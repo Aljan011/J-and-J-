@@ -55,10 +55,50 @@
   overflow: hidden;
 }
 
-/* ✅ Products */
+/*  Products */
 .pk-products {
   padding: 100px 0;
   background: linear-gradient(135deg, #f1f2f6 0%, #dfe4ea 100%);
+}
+
+.pk-card-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+/* Discount Badge (Top-Left) */
+.pk-card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: #e74c3c; /* Red for discount */
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  z-index: 10;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+/* Company Logo (Top-Right) */
+.pk-card-logo {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;   /* Adjust size as needed */
+  height: 40px;
+  border-radius: 50%; /* Optional: round logo */
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.pk-card-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .pk-products-inner {
@@ -164,6 +204,12 @@
   background: #229954;
 }
 
+.pk-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
 /* ✅ Responsive */
 @media (max-width: 1024px) {
   .pk-hero-inner {
@@ -180,13 +226,41 @@
   }
 }
 
+@media (max-width: 768px) {
+  .pk-products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pk-card-image {
+    height: 200px;
+  }
+
+  .pk-card-title {
+    font-size: 1.1rem;
+  }
+
+  .pk-section-title {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 480px) {
   .pk-products-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
   .pk-card-image {
     height: 180px;
+  }
+
+  .pk-card-body {
+    padding: 20px;
+  }
+
+  .pk-section-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
   }
 }

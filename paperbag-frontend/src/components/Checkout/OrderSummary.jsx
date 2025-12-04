@@ -7,7 +7,11 @@ function OrderSummary({ cart, subtotal, placeOrder }) {
 
       <ul className="summary-items">
         {cart.map((item) => (
-          <li key={`${item.slug}-${item.color || "no-color"}-${item.packSize || "no-pack"}-${item._uuid || crypto.randomUUID()}`}>
+          <li
+            key={`${item.slug}-${item.color || "no-color"}-${
+              item.packSize || "no-pack"
+            }-${item._uuid || crypto.randomUUID()}`}
+          >
             <span>
               {item.title} × {item.qty}
               {item.color ? ` | Color: ${item.color}` : ""}
@@ -27,9 +31,11 @@ function OrderSummary({ cart, subtotal, placeOrder }) {
         </strong>
       </div>
 
-      <button className="checkout-btn place-order" onClick={placeOrder}>
-        Place Order with eSewa
-      </button>
+      <button className="checkout-btn place-order esewa-order-btn" onClick={placeOrder}>
+  <img src="/esewa/esewa-icon-large.webp" alt="eSewa" className="esewa-logo" />
+  Place Order with eSewa
+</button>
+
     </aside>
   );
 }

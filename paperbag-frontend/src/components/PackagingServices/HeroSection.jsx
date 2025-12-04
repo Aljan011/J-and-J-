@@ -24,7 +24,7 @@ function HeroSection() {
                   aria-label="Packaging services hero image"
                 >
                   <Image
-                    src="/packaging-services/hero.webp"
+                    src="/paper-bags/paperbag.jpg"
                     alt="Packaging materials and tools"
                     width={700}
                     height={490}

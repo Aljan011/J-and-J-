@@ -59,7 +59,7 @@ export default async function BlogDetailPage({ params }) {
       image: ({ value }) => {
         if (!value?.asset) return null;
         return (
-          <img
+          <Image
             src={urlFor(value).width(800).url()}
             alt={value.alt || "Blog image"}
             style={{

@@ -1,19 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { Phone, Mail, ArrowUp } from "lucide-react"; //  iPhone-like icons
+import { Phone, Mail, ArrowUp, ShoppingCart } from "lucide-react"; // Added ShoppingCart icon
 
 const FloatingSidebar = () => {
   const [isMinimized, setIsMinimized] = useState(false);
 
-  // Scroll to top function
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Toggle minimize/maximize
   const toggleMinimize = () => {
     setIsMinimized(!isMinimized);
   };
@@ -22,6 +17,7 @@ const FloatingSidebar = () => {
     <>
       {/* Main Sidebar Container */}
       <div className={`hm-floating-sidebar ${isMinimized ? "hm-minimized" : ""}`}>
+
         {/* Phone Button */}
         <a
           href="tel:+977 9843223219"
@@ -38,6 +34,15 @@ const FloatingSidebar = () => {
           title="Email us: jandjsprinting@gmail.com"
         >
           <Mail size={22} />
+        </a>
+
+        {/* View Cart Button */}
+        <a
+          href="/cart"
+          className="hm-sidebar-btn hm-cart-btn"
+          title="View Cart"
+        >
+          <ShoppingCart size={22} />
         </a>
 
         {/* Scroll to Top Button */}
@@ -63,4 +68,3 @@ const FloatingSidebar = () => {
 };
 
 export default FloatingSidebar;
-

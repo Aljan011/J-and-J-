@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import "../../styles/checkout.css";
+
 import BillingForm from "../../components/Checkout/BillingForm.jsx";
 import OrderSummary from "../../components/Checkout/OrderSummary.jsx";
 
 export default function CheckoutPage() {
   const router = useRouter();
   const [cart, setCart] = useState([]);
+
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -22,12 +24,13 @@ export default function CheckoutPage() {
     notes: "",
   });
 
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     const stored = localStorage.getItem("cart");
     if (stored) setCart(JSON.parse(stored));
   }, []);
 
-  // subtotal uses price * qty for each line
   const subtotal = cart.reduce(
     (sum, item) => sum + Number(item.price || 0) * Number(item.qty || 1),
     0
@@ -35,26 +38,58 @@ export default function CheckoutPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // remove error when fixed
+    setErrors((prev) => ({
+      ...prev,
+      [name]: false,
+    }));
+  };
+
+  // ----------------------------
+  // VALIDATION FUNCTION
+  // ----------------------------
+  const validateForm = () => {
+    let newErrors = {};
+
+    // Required fields
+    if (!form.firstName.trim()) newErrors.firstName = true;
+    if (!form.lastName.trim()) newErrors.lastName = true;
+    if (!form.street.trim()) newErrors.street = true;
+
+    // Phone: must be 10 digits
+    if (!/^\d{10}$/.test(form.phone)) newErrors.phone = true;
+
+    // Email: must match regex
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      newErrors.email = true;
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
   };
 
   const placeOrder = async () => {
-    if (!form.firstName || !form.lastName || !form.phone || !form.street) {
-      alert("Please fill all required fields (*)");
+    // Run validation
+    if (!validateForm()) {
+      alert("Please correct highlighted fields.");
       return;
     }
 
     try {
       const orderData = { customer: form, cart, subtotal };
 
-      // Store order first
       await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),
       });
 
-      // Initiate eSewa payment
       const response = await fetch("/api/payment/initiate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -69,7 +104,6 @@ export default function CheckoutPage() {
 
       const { paymentUrl, params } = await response.json();
 
-      // Create hidden form to submit to eSewa
       const formElement = document.createElement("form");
       formElement.method = "POST";
       formElement.action = paymentUrl;
@@ -108,7 +142,7 @@ export default function CheckoutPage() {
   return (
     <main className="checkout-page">
       <div className="checkout-container">
-        <BillingForm form={form} handleChange={handleChange} />
+        <BillingForm form={form} handleChange={handleChange} errors={errors} />
         <OrderSummary cart={cart} subtotal={subtotal} placeOrder={placeOrder} />
       </div>
     </main>

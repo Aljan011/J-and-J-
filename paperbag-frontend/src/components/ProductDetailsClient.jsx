@@ -1,127 +1,73 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
 
-import Details_container from "./Products-detail/Details_container.jsx";
+import DetailsContainer from "./ProductDetail/DetailsContainer.jsx";
 
 export default function ProductDetailsClient({ product }) {
-  const router = useRouter();
+  const [toast , setToast] = useState({show: false, info: null});
+  const colorsArray = product.colors ? Object.keys(product.colors) : [];
+  const defaultColor = colorsArray.includes("brown")
+    ? "brown"
+    : colorsArray[0] || "";
+  const [selectedColor, setSelectedColor] = useState(defaultColor);
 
-  /* -------------------- STATES -------------------- */
+  const defaultPack = product.defaultPack || 100;
+  const [selectedPack, setSelectedPack] = useState(defaultPack);
   const [qty, setQty] = useState(1);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedPack, setSelectedPack] = useState(null);
 
-  /* -------------------- TEMP PACK PRICES (editable) -------------------- */
-  const PACK_PRICES = {
-    100: 100,
-    500: 400,
-    1000: 700,
-    2000: 1200,
-  };
+  const getPriceByColor = (color) => product.colors?.[color]?.pricePerUnit || 0;
+  const pricePerUnit = useMemo(
+    () => getPriceByColor(selectedColor),
+    [selectedColor]
+  );
 
-  const getPackPrice = (size) => {
-    if (!size) return null;
-    if (product.packPrices && product.packPrices[size])
-      return Number(product.packPrices[size]);
-    return PACK_PRICES[size] ?? null;
-  };
+  const totalPrice = useMemo(
+    () => pricePerUnit * selectedPack * qty,
+    [pricePerUnit, selectedPack, qty]
+  );
 
-  /* -------------------- PRICE PER UNIT OR PACK -------------------- */
-  const pricePer = useMemo(() => {
-    if (selectedPack) {
-      const packPrice = getPackPrice(selectedPack);
-      return packPrice != null ? packPrice : Number(product.price ?? 0);
-    }
-    return Number(product.price ?? 0);
-  }, [selectedPack, product]);
-
-  /* -------------------- CART HELPERS -------------------- */
-  const getCart = () => {
-    try {
-      const raw = localStorage.getItem("cart");
-      return raw ? JSON.parse(raw) : [];
-    } catch {
-      return [];
-    }
-  };
-
-  const saveCart = (cart) => localStorage.setItem("cart", JSON.stringify(cart));
-
-  /* -------------------- ADD TO CART -------------------- */
   const addToCart = (goToCart = false) => {
-    if (!product?.slug) {
-      alert("Product information missing.");
-      return;
-    }
-
     const item = {
-      id:
-        product._id ||
-        product.slug?.current ||
-        `${product.title}-${Date.now()}`,
-      slug: product.slug?.current ?? product.slug,
-      title: product.title,
-      price: pricePer,
-      currency: product.currency ?? "NPR",
-      image:
-        product.mainImage?.asset?.url ||
-        product.images?.[0]?.asset?.url ||
-        null,
-      qty: qty,
-      color: selectedColor || null,
-      packSize: selectedPack || null,
-      _uuid:
-        typeof crypto !== "undefined"
-          ? crypto.randomUUID()
-          : `${Date.now()}-${Math.random()}`,
+      id: `${product.slug}-${selectedColor}-${selectedPack}`,
+      title: product.name,
+      color: selectedColor,
+      packSize: selectedPack,
+      price: totalPrice,
+      qty,
+      _uuid: crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`,
     };
-
-    const cart = getCart();
-
-    const existingIndex = cart.findIndex(
-      (c) =>
-        c.slug === item.slug &&
-        (c.color || null) === (item.color || null) &&
-        (c.packSize || null) === (item.packSize || null)
-    );
-
-    if (existingIndex > -1) {
-      cart[existingIndex].qty += item.qty;
-    } else {
-      cart.push(item);
-    }
-
-    saveCart(cart);
-
-    if (goToCart) return router.push("/cart");
-
-    if (
-      confirm(
-        `${item.title} (${item.color || "Default"}, ${
-          item.packSize ? `Pack of ${item.packSize}` : "Single"
-        }) added to cart. Go to cart now?`
-      )
-    ) {
-      router.push("/cart");
-    }
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const existingIndex = cart.findIndex((c) => c.id === item.id);
+    if (existingIndex > -1) cart[existingIndex].qty += qty;
+    else cart.push(item);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    if (goToCart) window.location.href = "/cart";
+    else {setToast ({show: true,  info: null});}
+    
   };
 
-  /* -------------------- BUY NOW -------------------- */
-  const handleBuyNow = () => addToCart(true);
+  const [mainImage, setMainImage] = useState(
+    product.mainImage || product.images[0]
+  );
 
   return (
-    <Details_container
+    <DetailsContainer
       product={product}
+      addToCart={addToCart}
       selectedColor={selectedColor}
       setSelectedColor={setSelectedColor}
       selectedPack={selectedPack}
       setSelectedPack={setSelectedPack}
       qty={qty}
       setQty={setQty}
-      addToCart={addToCart}
-      handleBuyNow={handleBuyNow}
+      mainImage={mainImage}
+      setMainImage={setMainImage}
+      totalPrice={totalPrice}
+      toast={toast}
+      setToast={setToast}
+      pricePerUnit={pricePerUnit}
+
     />
   );
 }

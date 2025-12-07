@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import { sanityClient } from "../../../../lib/sanity.js";
 
 const client = sanityClient.withConfig({
-  token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN,
+  token: process.env.SANITY_API_TOKEN  ,
   useCdn: false,
 });
 

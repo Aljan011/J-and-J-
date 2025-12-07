@@ -11,6 +11,7 @@ import OrderSummary from "../../components/Checkout/OrderSummary.jsx";
 export default function CheckoutPage() {
   const router = useRouter();
   const [cart, setCart] = useState([]);
+  const [isPlacing, setIsPlacing] = useState(false);
 
   const [form, setForm] = useState({
     firstName: "",
@@ -26,9 +27,33 @@ export default function CheckoutPage() {
 
   const [errors, setErrors] = useState({});
 
+  // Load cart from localStorage and normalize fields
   useEffect(() => {
     const stored = localStorage.getItem("cart");
-    if (stored) setCart(JSON.parse(stored));
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        const normalized = parsed.map((it) => ({
+          // keep original props but ensure canonical keys the checkout expects
+          _uuid: it._uuid || it.id || `${it.title}-${Date.now()}`,
+          id: it.id || it._id || it.productId || "",
+          title: it.title || it.productName || "",
+          image: it.image || it.mainImage || "",
+          colors: it.colors || it.productColors || null, // may be null
+          color: it.color || it.selectedColor || null,
+          packSize: it.packSize || it.selectedPack || null,
+          unitPrice: Number(it.unitPrice ?? it.price ?? it.pricePerUnit ?? 0),
+          qty: Number(it.qty ?? it.quantity ?? 1),
+          currency: it.currency || "NPR",
+        }));
+        setCart(normalized);
+        // keep localStorage consistent with normalized shape
+        localStorage.setItem("cart", JSON.stringify(normalized));
+      } catch (e) {
+        console.error("Failed to parse cart from localStorage", e);
+        setCart([]);
+      }
+    }
   }, []);
 
   const subtotal = cart.reduce(
@@ -49,159 +74,213 @@ export default function CheckoutPage() {
     if (!form.street.trim()) newErrors.street = true;
     if (!/^\d{10}$/.test(form.phone)) newErrors.phone = true;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = true;
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-// 2️⃣ Build order payload for API
-const buildOrderPayload = (cartItem, form) => {
-  if (!cartItem.colors || cartItem.colors.length === 0) {
-    console.warn("No colors available for cartItem:", cartItem);
-    cartItem.colors = [{ name: "Default", packPrices: [{ packSize: 1, price: cartItem.price || 0 }] }];
-  }
+  // Build a payload for a single cart item that matches the /api/orders route expectations
+  const buildOrderPayload = (cartItem, form) => {
+    // Ensure we have some form of productColors shape the backend expects
+    let productColors = Array.isArray(cartItem.colors) ? cartItem.colors : null;
 
-  // Ensure selected color exists; fallback to first color if not
-  let selectedColor = cartItem.color;
-  const colorObj = cartItem.colors.find(c => c.name === selectedColor);
-  if (!colorObj) {
-    console.warn(
-      "Selected color not found, defaulting to first color:",
-      selectedColor,
-      cartItem.colors
-    );
-    selectedColor = cartItem.colors[0].name;
-  }
+    if (!productColors || productColors.length === 0) {
+      // create a fallback productColors array from the single color/pack available in cartItem
+      productColors = [
+        {
+          name: cartItem.color || "Default",
+          packPrices: [
+            {
+              packSize: cartItem.packSize || 1,
+              price: Number(cartItem.unitPrice || cartItem.price || 0),
+            },
+          ],
+        },
+      ];
+    } else {
+      // normalize packPrices inside productColors (ensure numbers)
+      productColors = productColors.map((c) => ({
+        ...c,
+        packPrices:
+          Array.isArray(c.packPrices) && c.packPrices.length
+            ? c.packPrices.map((p) => ({
+                packSize: Number(p.packSize ?? p.size ?? p.pack ?? 1),
+                price: Number(p.price ?? p.amount ?? 0),
+              }))
+            : [{ packSize: cartItem.packSize || 1, price: Number(cartItem.unitPrice || 0) }],
+      }));
+    }
 
-  // Ensure selected pack exists; fallback to first pack if not
-  let selectedPack = cartItem.packSize;
-  const packObj = (cartItem.colors.find(c => c.name === selectedColor)?.packPrices || []).find(
-    p => Number(p.packSize) === Number(selectedPack)
-  );
-  if (!packObj) {
-    console.warn(
-      "Selected pack size not found, defaulting to first pack:",
-      selectedPack,
-      cartItem.colors.find(c => c.name === selectedColor)?.packPrices
-    );
-    selectedPack = cartItem.colors.find(c => c.name === selectedColor)?.packPrices?.[0]?.packSize || 1;
-  }
+    // selectedColor fallback
+    const selectedColor = cartItem.color || (productColors[0] && productColors[0].name) || "Default";
 
-  const price = (cartItem.colors.find(c => c.name === selectedColor)?.packPrices || []).find(
-    p => Number(p.packSize) === Number(selectedPack)
-  )?.price || cartItem.price || 0;
+    // selectedPack fallback
+    let selectedPack = cartItem.packSize || null;
+    if (!selectedPack) {
+      // try to pick first pack in the selected color
+      const colorObj = productColors.find((c) => c.name === selectedColor) || productColors[0];
+      selectedPack = colorObj?.packPrices?.[0]?.packSize ?? 1;
+    }
 
-  const payload = {
-  // Customer info
-  firstName: form.firstName || "",
-  lastName: form.lastName || "",
-  company: form.company || "",
-  street: form.street || "",
-  landmark: form.landmark || "",
-  city: form.city || "Kathmandu",
-  phone: form.phone || "",
-  email: form.email || "",
-  notes: form.notes || "",
+    // find price for the selected pack
+    const colorObj = productColors.find((c) => c.name === selectedColor) || productColors[0];
+    const packObj =
+      (colorObj && Array.isArray(colorObj.packPrices) && colorObj.packPrices.find((p) => Number(p.packSize) === Number(selectedPack))) ||
+      colorObj?.packPrices?.[0] ||
+      { packSize: selectedPack, price: Number(cartItem.unitPrice || 0) };
 
-  // Product info
-  productId: cartItem.id || "",
-  productName: cartItem.title || "",
-  mainImage: cartItem.image || "",
-  productColors: cartItem.colors || [],        // all available colors
-  selectedColor: selectedColor || cartItem.colors?.[0]?.name || "Default", 
-  selectedPack: selectedPack || cartItem.packSizes?.[0]?.size || 1,
-  quantity: cartItem.qty || 1,
-  unitPrice: cartItem.unitPrice || 0,
-  subtotal: price || cartItem.unitPrice * (cartItem.qty || 1),
+    const unitPrice = Number(packObj.price ?? cartItem.unitPrice ?? 0);
 
-  // For eSewa payment
-  totalAmount: price || cartItem.unitPrice * (cartItem.qty || 1),
-  productPack: selectedPack || cartItem.packSizes?.[0]?.size || 1,
-  productColor: selectedColor || cartItem.colors?.[0]?.name || "Default",
-};
+    const payload = {
+      // billing/customer
+      firstName: form.firstName || "",
+      lastName: form.lastName || "",
+      company: form.company || "",
+      street: form.street || "",
+      landmark: form.landmark || "",
+      city: form.city || "Kathmandu",
+      phone: form.phone || "",
+      email: form.email || "",
+      notes: form.notes || "",
 
-  console.log("Payload sent to Sanity:", payload);
-  return payload;
-};
+      // required product fields (match your route checks)
+      productId: String(cartItem.id || ""),
+      productName: String(cartItem.title || ""),
+      mainImage: String(cartItem.image || ""),
+      productColors: productColors, // normalized array with packPrices
+      selectedColor: String(selectedColor),
+      selectedPack: Number(selectedPack),
+      quantity: Number(cartItem.qty || 1),
+      unitPrice: Number(unitPrice),
 
-// 3️⃣ Save orders in Sanity
-const saveOrders = async () => {
-  try {
-    const savedIds = [];
-    for (const item of cart) {
-      const payload = buildOrderPayload(item, form);
+      // convenience values
+      subtotal: Number(unitPrice) * Number(cartItem.qty || 1),
+      currency: cartItem.currency || "NPR",
+    };
 
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+    console.log("buildOrderPayload -> payload:", payload);
+    return payload;
+  };
 
-      const data = await res.json();
+  // Save one order per cart item (Option B). Returns array of created order IDs or null on failure.
+  const saveOrders = async () => {
+    if (!cart.length) {
+      alert("Cart is empty.");
+      return null;
+    }
 
-      if (!res.ok || !data.ok) {
-        console.error("Save order error:", data);
-        throw new Error(data.message || "Order saving failed");
+    try {
+      const createdIds = [];
+      for (const item of cart) {
+        const payload = buildOrderPayload(item, form);
+
+        const res = await fetch("/api/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        // parse body safely
+        let data = null;
+        try {
+          data = await res.json();
+        } catch (err) {
+          console.error("Non-JSON response while saving order:", err);
+          throw new Error("Invalid response from order endpoint");
+        }
+
+        if (!res.ok || !data?.ok) {
+          console.error("Save order error:", data || "Unknown error");
+          throw new Error(data?.message || "Order saving failed");
+        }
+
+        createdIds.push(data.localOrderId);
       }
 
-      savedIds.push(data.localOrderId);
+      return createdIds;
+    } catch (err) {
+      console.error("SaveOrders failed:", err);
+      throw err;
     }
-    return savedIds;
-  } catch (err) {
-    console.error("Save order error:", err);
-    alert("Failed to save order: " + err.message);
-    return null;
-  }
-};
+  };
 
-
- const placeOrder = async () => {
-  if (!validateForm()) {
-    alert("Please correct highlighted fields.");
-    return;
-  }
-
-  const orderIds = await saveOrders();
-  if (!orderIds) return;
-
-  try {
-    const response = await fetch("/api/payment/initiate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: subtotal, cart, billing: form }),
-    });
-
-    const data = await response.json(); // read once
-    console.log("Payment API response:", data);
-
-    if (!response.ok) {
-      alert(data.error || "Payment failed");
+  // Single click-safe placeOrder that saves orders then initiates payment
+  const placeOrder = async () => {
+    if (isPlacing) return; // guard
+    if (!validateForm()) {
+      alert("Please correct highlighted fields.");
       return;
     }
 
-    const { paymentUrl, params } = data;
+    setIsPlacing(true);
 
-    const formElement = document.createElement("form");
-    formElement.method = "POST";
-    formElement.action = paymentUrl;
-    formElement.style.display = "none";
+    try {
+      // 1) Save one order per cart item
+      const createdOrderIds = await saveOrders(); // will throw on failure
+      if (!createdOrderIds || !createdOrderIds.length) {
+        throw new Error("Failed to save orders");
+      }
 
-    Object.entries(params).forEach(([key, value]) => {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = key;
-      input.value = value;
-      formElement.appendChild(input);
-    });
+      console.log("Orders created:", createdOrderIds);
 
-    document.body.appendChild(formElement);
-    formElement.submit();
-  } catch (err) {
-    console.error("eSewa Payment Error:", err);
-    alert("Payment error!");
-  }
-};
+      // 2) Initiate payment once (send primary item info for display)
+      const primary = cart[0] || {};
+      const paymentPayload = {
+        amount: Number(subtotal),
+        cart,
+        billing: form,
+        // helpful fields for the server to create eSewa params
+        productName: primary.title || primary.productName || "Order",
+        productColor: primary.color || primary.selectedColor || (primary.colors?.[0]?.name ?? ""),
+        productPack: primary.packSize || primary.selectedPack || "",
+        orderIds: createdOrderIds, // so server can link payment to created orders if needed
+      };
 
+      console.log("Initiating payment with:", paymentPayload);
+
+      const response = await fetch("/api/payment/initiate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(paymentPayload),
+      });
+
+      const paymentData = await response.json(); // parse once
+      console.log("Payment initiate response:", paymentData);
+
+      if (!response.ok) {
+        alert(paymentData?.error || "Payment initiation failed");
+        return;
+      }
+
+      const { paymentUrl, params } = paymentData;
+      if (!paymentUrl || !params) {
+        console.error("Payment response missing paymentUrl/params:", paymentData);
+        alert("Payment failed: invalid response");
+        return;
+      }
+
+      // submit hidden form to eSewa
+      const formElement = document.createElement("form");
+      formElement.method = "POST";
+      formElement.action = paymentUrl;
+      formElement.style.display = "none";
+
+      Object.entries(params).forEach(([key, value]) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = String(value ?? "");
+        formElement.appendChild(input);
+      });
+
+      document.body.appendChild(formElement);
+      formElement.submit();
+    } catch (err) {
+      console.error("Place order error:", err);
+      alert("Order failed: " + (err.message || "Unexpected error"));
+    } finally {
+      setIsPlacing(false);
+    }
+  };
 
   if (cart.length === 0) {
     return (
@@ -222,6 +301,7 @@ const saveOrders = async () => {
       <div className="checkout-container">
         <BillingForm form={form} handleChange={handleChange} errors={errors} />
         <OrderSummary cart={cart} subtotal={subtotal} placeOrder={placeOrder} />
+        {/* disable button inside OrderSummary by passing isPlacing (update component if you want visual disabled) */}
       </div>
     </main>
   );

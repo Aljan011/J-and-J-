@@ -213,7 +213,7 @@
   margin-top: 8px;
 }
 
-/* Share Container */
+/* ================= SHARE SECTION ================= */
 .pd-share {
   display: flex;
   align-items: center;
@@ -222,49 +222,81 @@
   flex-wrap: wrap;
 }
 
-.pd-share span {
+.pd-share span.share-label {
   font-weight: 700;
   color: #0f1724;
+  font-size: 0.95rem;
 }
 
-/* Buttons */
-.pd-share-btn {
-  padding: 8px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+/* ================= ICONS CONTAINER ================= */
+.share-icons {
+  display: flex;       /* horizontal layout */
+  align-items: center;
+  gap: 25px;
+  height: 38px;        /* align with button size */
+}
+
+/* ================= SHARE ICON LINKS ================= */
+.share-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 38px;
   height: 38px;
-  transition: 0.25s ease;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  overflow: hidden;
 }
 
-.pd-share-btn svg {
-  width: 20px;
-  height: 20px;
-  fill: #fff;
+.share-icon img {
+  width: 40px;   /* icon size inside button */
+  height: 45px;
+  object-fit: contain;
+  
 }
 
-/* Colors */
-.pd-share-btn.facebook {
+/* Colors
+.share-icon:nth-child(1) { /
   background: #1877f2;
 }
 
-.pd-share-btn.instagram {
+.share-icon:nth-child(2) { 
   background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf);
 }
 
-.pd-share-btn.tiktok {
+.share-icon:nth-child(3) { 
   background: #000;
-}
+} */
 
 /* Hover */
-.pd-share-btn:hover {
+.share-icon:hover {
   transform: scale(1.08);
   opacity: 0.9;
 }
+
+/* ================= RESPONSIVE (MAX-WIDTH 480px) ================= */
+@media (max-width: 480px) {
+  .pd-share {
+    gap: 6px;
+  }
+
+  .share-icons {
+    height: 32px;
+    gap: 6px;
+  }
+
+  .share-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .share-icon img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 
 /* ================== MEDIA QUERIES ================== */
 @media (min-width: 769px) {
@@ -454,14 +486,7 @@
     font-size: 0.95rem;
   }
 
-  .pd-share {
-    gap: 6px;
-  }
-
-  .pd-share-btn {
-    padding: 5px 10px;
-    font-size: 0.85rem;
-  }
+  
 
   .breadcrumbs,
   .breadcrumb,

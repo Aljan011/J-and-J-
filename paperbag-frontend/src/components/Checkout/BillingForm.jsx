@@ -45,6 +45,8 @@ function BillingForm({ form, handleChange, errors }) {
           value={form.street}
           onChange={handleChange}
           className={errors.street ? "error" : ""}
+          
+
         />
       </div>
 

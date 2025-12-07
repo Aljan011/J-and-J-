@@ -5,39 +5,42 @@ import BlogInternalSection from "../../components/BlogInternalSection.jsx";
 import HeroSection from "../../components/PackagingServices/HeroSection.jsx";
 import ProductSection from "../../components/PackagingServices/ProductSection.jsx";
 
-import { createClient } from "next-sanity";
+import { sanityClient } from "../../../lib/sanity.js";
 
-const client = createClient({
-  projectId: process.env.SANITY_PROJECT_ID || "jz6c1suz",
-  dataset: process.env.SANITY_DATASET || "production",
-  useCdn: true,
-});
-
+// Fetch products from Sanity
 async function getProducts() {
   try {
-    const products = await client.fetch(`
-      *[_type == "product"]{
-        _id,
-        id,
-        slug,
-        name,
-        brand,
-        size,
-        material,
-        shape,
-        usage,
-        recyclable,
-        customPrinting,
-        mainImage,
-        images,
-        packs,
-        defaultPack,
-        colors,
-        discountRate,
-        seo,
-        shortDescription,
-        longDescription
-      }
+    const products = await sanityClient.fetch(`
+      *[_type == "producte"]{
+       _id,
+  name,
+  slug,
+  brand,
+  size,
+  material,
+  shape,
+  usage,
+  recyclable,
+  customPrinting,
+  mainImage,
+  images,
+  packs,
+  defaultPack,
+  discountRate,
+  seo,
+  shortDescription,
+  longDescription,
+  details,
+  faqs,
+  colors[]{
+    name,
+    hex,
+    packPrices[]{
+      packSize,
+      price
+    }
+  }
+}
     `);
     return products;
   } catch (err) {
@@ -45,6 +48,21 @@ async function getProducts() {
     return [];
   }
 }
+
+function getLowestPrice(product) {
+  if (!product.colors) return 0;
+
+  let lowest = Infinity;
+
+  product.colors.forEach(c => {
+    c.packPrices?.forEach(pp => {
+      if (pp.price < lowest) lowest = pp.price;
+    });
+  });
+
+  return lowest === Infinity ? 0 : lowest;
+}
+
 
 export default async function PackagingServicesPage() {
   const products = await getProducts();

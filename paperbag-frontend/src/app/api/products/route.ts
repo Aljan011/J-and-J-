@@ -13,7 +13,7 @@ const client = sanityClient.withConfig({
 export async function GET() {
   try {
     const products = await client.fetch(`
-      *[_type == "product"]{
+      *[_type == "product" && slug.current == $slug[0]]{
         _id,
         id,
         slug,

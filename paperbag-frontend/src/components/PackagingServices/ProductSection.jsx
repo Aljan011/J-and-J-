@@ -3,8 +3,11 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "../../../lib/sanityImage.js";
 
 import AddToCartToast from "../cart/AddtoCartToast.jsx";
+import {getLowestUnitPrice} from '../../app/utils/getLowestUnitPrice.js';
+import {getUnitPrice} from '../../app/utils/getUnitPrice.js';
 
 function ProductSection({ products }) {
   const [toast, setToast] = useState({ show: false, info: null });
@@ -19,58 +22,90 @@ function ProductSection({ products }) {
     setDiscounts(discountMap);
   }, [products]);
 
-  const getPriceRange = (product) => {
-    const colorPrices = Object.values(product.colors).map(
-      (c) => c.pricePerUnit
-    );
-    const minUnit = Math.min(...colorPrices);
-    const minPack = Math.min(...product.packs);
-    return { low: minUnit * minPack };
+  console.log("Product in listing:", products);
+
+
+const buildCartItemFromListing = (product) => {
+  const defaultColor = product.colors?.[0] || null;
+
+  // Find lowest price for that default color
+  const lowestPack = defaultColor?.packPrices?.reduce(
+    (min, p) => (p.price < min.price ? p : min),
+    defaultColor.packPrices[0]
+  );
+
+  return {
+    _uuid: crypto.randomUUID(),
+
+    id: product._id,
+    title: product.name,
+
+    image: product.mainImage?.asset ? product.mainImage.asset.url : "",
+    
+    // Color info
+    colors: product.colors,
+    color: defaultColor?.name || null,
+
+    // Pack & price
+    packSize: lowestPack?.packSize || product.defaultPack || null,
+    price: lowestPack?.price || 0,
+
+    qty: 1,
+
+    currency: "NPR",
+  };
+};
+
+
+
+const addToCart = (product) => {
+  console.log("Adding product:", product);
+
+  // FIXED IMAGE
+  const imageUrl = product.mainImage
+    ? urlFor(product.mainImage).url()
+    : (product.images?.[0] || "/placeholder.png");
+
+  const defaultColor = product.colors?.[0];
+  const defaultPack = defaultColor?.packPrices?.[0];
+
+  const newItem = {
+    _uuid: crypto.randomUUID(),
+    id: product._id,
+    title: product.name,
+
+    image: imageUrl, // ← FIXED
+
+    // Color + packs
+    colors: product.colors,
+    color: defaultColor?.name || null,
+
+    packSize: defaultPack?.packSize || product.defaultPack || 1,
+    unitPrice: Number(defaultPack?.price) || 0,   // ← FIXED name unitPrice
+
+    qty: 1,
+    currency: "NPR",
   };
 
-  const buildCartItemFromListing = (product) => {
-    const colorsArray = product.colors ? Object.keys(product.colors) : [];
-    const defaultColor = colorsArray.includes("brown")
-      ? "brown"
-      : colorsArray[0] || "";
-    const defaultPack = product.defaultPack || 100;
-    const pricePerUnit = product.colors?.[defaultColor]?.pricePerUnit || 0;
-    const totalPrice = pricePerUnit * defaultPack * 1; // qty = 1
+  console.log("CART ITEM GENERATED:", newItem);
 
-    return {
-      id: `${product.slug}-${defaultColor}-${defaultPack}`,
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  cart.push(newItem);
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  setToast({
+    show: true,
+    info: {
       title: product.name,
-      color: defaultColor,
-      packSize: defaultPack,
-      price: totalPrice,
-      qty: 1,
-      _uuid: crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`,
-    };
-  };
+      color: newItem.color,
+      packSize: newItem.packSize,
+    },
+  });
+};
 
-  const addToCart = (product) => {
-    const newItem = buildCartItemFromListing(product);
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existingIndex = cart.findIndex((c) => c.id === newItem.id);
 
-    if (existingIndex > -1) {
-      cart[existingIndex].qty += 1;
-    } else {
-      cart.push(newItem);
-    }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
 
-    // Show toast
-    setToast({
-      show: true,
-      info: {
-        title: product.name,
-        color: newItem.color,
-        packSize: newItem.packSize,
-      },
-    });
-  };
 
   return (
     <section id="pk-products" className="pk-products">
@@ -80,31 +115,31 @@ function ProductSection({ products }) {
         <h2 className="pk-section-title">Our Packaging Range</h2>
         <div className="pk-products-grid">
           {products.map((p) => {
-            const { low } = getPriceRange(p);
+            const lowestUnitPrice = getLowestUnitPrice(p);
+            <p className="p-price">Starting at <strong>Rs. {lowestUnitPrice.toFixed(2)}</strong></p>;
+
             const discount = discounts[p.slug];
 
             return (
               <Link
-                href={`/packaging-services/${p.slug}`}
-                key={p.slug}
+                href={`/packaging-services/${p.slug.current}`}
+                key={p.slug?.current || p._id}
                 passHref
               >
                 <article className="pk-card">
                   <div className="pk-card-image">
                     <Image
-                      src={p.mainImage}
-                      alt={p.name}
+                      src={
+                        p.mainImage
+                          ? urlFor(p.mainImage).url()
+                          : "/placeholder.png"
+                      }
+                      alt={p.name || "Product Image"}
                       width={800}
-                      height={520}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 1024px) 48vw, 30vw"
+                      height={600}
                     />
-                    {discount && (
-                      <span className="pk-card-badge">{discount}% OFF</span>
+                    {p.discountRate && (
+                      <span className="pk-card-badge">{p.discountRate}% OFF</span>
                     )}
                     <img
                       className="pk-card-logo"
@@ -118,7 +153,7 @@ function ProductSection({ products }) {
                     <p className="pk-card-desc">J&J Printers</p>
 
                     <div className="pk-card-actions">
-                      <span className="pk-price">Rs {low}</span>
+                      <span className="pk-price">Rs {getLowestUnitPrice(p)}</span>
 
                       <button
                         className="pk-cta"

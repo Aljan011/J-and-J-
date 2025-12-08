@@ -306,7 +306,10 @@ export const products = [
         q: "How is this box shipped?",
         a: "The boxes are shipped flat to save space and reduce shipping costs."
       }
-    ]
+    ],
+
+    
+    
   },
 
   {
@@ -578,9 +581,11 @@ export const products = [
       title: "3 Ply Corrugated Flap Box - 6x6x2 Inch | Durable Jewellery & Gift Packaging",
       description:
         "Buy durable 3 Ply Corrugated Flap Boxes for jewelry, cosmetics, small electronics, and e-commerce packaging. Affordable, strong, and available in multiple colors inspired by Nepal."
-    }
+    },
+
     
   
+
 
   },
 

@@ -1,4 +1,4 @@
-import {StructureResolver} from 'sanity/structure'
+import { StructureBuilder } from 'sanity/structure'
 
 import home from './homeStructure'
 import pages from './pageStructure'
@@ -7,27 +7,29 @@ import colorThemes from './colorThemeStructure'
 import settings from './settingStructure'
 
 // IDs to hide from default list
-const hiddenDocTypes = (listItem: any) => {
-  console.log(listItem)
-  return !['home', 'page', 'colorTheme', 'settings'].includes(listItem.getId())
-}
+const hiddenDocTypes = (listItem: { getId: () => string | undefined }) =>
+  !['home', 'page', 'colorTheme', 'settings'].includes(listItem.getId() || '')
 
-export const structure: StructureResolver = (S, context) =>
+export const structure = (S: StructureBuilder) =>
   S.list()
     .title('Content')
     .items([
-      home(S, context),
-      pages(S, context),
+      home(S),      
+      pages(S),     
       S.divider(),
 
-      // products(S, context),
+      // products(S),
+      // S.divider(),
+
+      colorThemes(S),
       S.divider(),
 
-      colorThemes(S, context),
+      settings(S),
       S.divider(),
 
-      settings(S, context),
-      S.divider(),
-
-      ...S.documentTypeListItems().filter(hiddenDocTypes),
+      // Filter out hidden document types correctly
+      ...S.documentTypeListItems().filter((item) => {
+        const id = item.getId?.() || ''
+        return !['home', 'page', 'colorTheme', 'settings'].includes(id)
+      }),
     ])

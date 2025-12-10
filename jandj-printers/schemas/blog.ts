@@ -31,7 +31,7 @@ export default defineType({
       of: [{ type: 'reference', to: { type: 'category' } }],
     }),
     defineField({ name: 'publishedAt', title: 'Published At', type: 'datetime' }),
-    defineField({ name: 'body', title: 'Body', type: 'blockContent' }), // ensure blockContent is in schemaTypes
+    defineField({ name: 'body', title: 'Body', type: 'blockContent' }), 
     defineField({
       name: 'productType',
       title: 'Product Type',

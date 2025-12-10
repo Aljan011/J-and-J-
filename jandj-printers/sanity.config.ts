@@ -1,21 +1,14 @@
-import {defineConfig, isDev} from 'sanity'
+import { defineConfig, isDev } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
 
-import {structureTool} from 'sanity/structure'
-import { schemaTypes  } from './schemaTypes'
-import {structure} from './structure'
-
-import {visionTool} from '@sanity/vision'
-import {colorInput} from '@sanity/color-input'
-import {imageHotspotArrayPlugin} from 'sanity-plugin-hotspot-array'
-import {media, mediaAssetSource} from 'sanity-plugin-media'
-import {customDocumentActions} from './plugins/customDocumentActions'
+import { structure } from './structure'
+import { schemaTypes } from './schemaTypes'
+import { customDocumentActions } from './plugins/customDocumentActions'
 import Navbar from './components/studio/Navbar'
-
-
 
 // Plugins only for development
 const devOnlyPlugins = [visionTool()]
-
 
 export default defineConfig({
   name: 'default',
@@ -25,27 +18,24 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool({structure}),
-    colorInput(),
-    imageHotspotArrayPlugin(),
+    structureTool({ structure }),
     customDocumentActions(),
-    media(),
     ...(isDev ? devOnlyPlugins : []),
   ],
 
   form: {
     file: {
-      assetSources: (previousAssetSources) =>
-        previousAssetSources.filter((assetSource) => assetSource !== mediaAssetSource),
+      assetSources: (prev) =>
+        prev.filter((source) => source.name !== 'mediaAssetSource'), // optional cleanup
     },
     image: {
-      assetSources: (previousAssetSources) =>
-        previousAssetSources.filter((assetSource) => assetSource === mediaAssetSource),
+      assetSources: (prev) =>
+        prev.filter((source) => source.name === 'mediaAssetSource'),
     },
   },
 
   schema: {
-    types: schemaTypes, 
+    types: schemaTypes,
   },
 
   studio: {
@@ -54,5 +44,3 @@ export default defineConfig({
     },
   },
 })
-
-

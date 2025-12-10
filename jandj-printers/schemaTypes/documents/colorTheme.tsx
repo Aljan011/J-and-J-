@@ -16,13 +16,13 @@ export const colorThemeType = defineType({
     }),
     defineField({
       name: 'text',
-      type: 'color',
+      type: 'colorObject',
       options: {disableAlpha: true},
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'background',
-      type: 'color',
+      type: 'colorObject',
       options: {disableAlpha: true},
       validation: (Rule) => Rule.required(),
     }),

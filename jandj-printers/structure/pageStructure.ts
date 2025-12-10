@@ -1,7 +1,7 @@
 import { DocumentsIcon } from '@sanity/icons'
 import { ListItemBuilder, StructureBuilder, StructureResolverContext } from 'sanity/structure'
 
-export default function pages(S: StructureBuilder, context: StructureResolverContext): ListItemBuilder {
+export default function pages(S: StructureBuilder) {
   return S.listItem()
     .id('pagesStructure')
     .title('Pages')
@@ -12,4 +12,4 @@ export default function pages(S: StructureBuilder, context: StructureResolverCon
         .id('pagesList')
         .title('Pages')
     )
-}
+  }

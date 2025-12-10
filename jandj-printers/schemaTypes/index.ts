@@ -30,6 +30,8 @@ import { instagramType } from './objects/module/instagramType'
 import { productFeaturesType } from './objects/module/productFeaturesType'
 import { productReferenceType } from './objects/module/productReferenceType'
 
+import { colorObjectType } from './objects/color/colorObject'
+
 // -- link folder --
 import { linkEmailType } from './objects/link/linkEmailType'
 import { linkExternalType } from './objects/link/linkExternalType'
@@ -141,6 +143,8 @@ const objects = [
   customProductOptionColorType,
   customProductOptionSizeObjectType,
   customProductOptionSizeType,
+
+  colorObjectType,
 
   // collection
   collectionGroupType,
